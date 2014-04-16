@@ -5,6 +5,9 @@ package com.kb.monopoly.board;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author kbennett
@@ -12,10 +15,15 @@ import java.util.Collection;
  */
 public class Board {
 
-    private ArrayList<String> spaces = new ArrayList<String>(40);
+    private static final Logger log = Logger.getLogger(Board.class);
 
-    private Collection<String> chanceCards = new ArrayList<String>(16);
-    private Collection<String> communityChestCards = new ArrayList<String>(16);
+    private final ArrayList<String> spaces = new ArrayList<String>(40);
+
+    private final Collection<String> chanceCards = new ArrayList<String>(16);
+    private final Collection<String> communityChestCards = new ArrayList<String>(
+            16);
+
+    private final Random dice = new Random(System.nanoTime());
 
     public Board() {
 
@@ -24,6 +32,9 @@ public class Board {
     }
 
     private void loadCards() {
+
+        log.info("Loading Cards...");
+
         for (int j = 0; j < 16; j++) {
             chanceCards.add("ChanceCard " + j);
             communityChestCards.add("CommunityChestCard " + j);
@@ -31,6 +42,8 @@ public class Board {
     }
 
     private void loadSpaces() {
+
+        log.info("Loading Spaces...");
 
         spaces.add("Go");
 
@@ -45,6 +58,7 @@ public class Board {
     }
 
     public Collection<String> getSpaces() {
+
         return spaces;
     }
 
@@ -58,4 +72,19 @@ public class Board {
         return communityChestCards;
     }
 
+    /**
+     * Roll a 6 sided dice and return the result.
+     * 
+     * @return - random result of a 6-sided Dice
+     */
+    public int rollDie() {
+
+        log.info("Rolling Die...");
+
+        int roll = dice.nextInt(5) + 1;
+
+        log.info("[" + roll + "]");
+
+        return roll;
+    }
 }
