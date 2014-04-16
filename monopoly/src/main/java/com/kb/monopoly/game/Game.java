@@ -5,6 +5,7 @@ package com.kb.monopoly.game;
 
 import java.util.ArrayList;
 
+import com.kb.monopoly.board.Board;
 import com.kb.monopoly.player.Player;
 
 /**
@@ -14,8 +15,11 @@ import com.kb.monopoly.player.Player;
 public class Game {
 
     private ArrayList<Player> playerList = new ArrayList<Player>();
+    private Board board;
 
     public Game() {
+
+        this.board = new Board();
 
     }
 
@@ -28,4 +32,10 @@ public class Game {
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
+
+    public Object getBoard() {
+
+        return board;
+    }
+
 }

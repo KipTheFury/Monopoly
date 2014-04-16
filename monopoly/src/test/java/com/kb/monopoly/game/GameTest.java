@@ -3,6 +3,7 @@
  */
 package com.kb.monopoly.game;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -24,6 +25,11 @@ public class GameTest {
     @Before
     public void setUp() throws Exception {
         g = new Game();
+    }
+
+    @Test
+    public void gameHasBoard() throws Exception {
+        assertNotNull(g.getBoard());
     }
 
     @Test
