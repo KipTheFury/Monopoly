@@ -14,15 +14,22 @@ import org.junit.Test;
  */
 public class PlayerTest {
 
+    private Player bob;
+
     @Before
     public void Setup() {
-
+        bob = new Player("Bob");
     }
 
     @Test
     public void canCreatePlayerCalledBob() throws Exception {
-        Player bob = new Player("Bob");
 
         assertEquals("Bob", bob.getName());
+    }
+
+    @Test
+    public void playerStartsWith1500Money() throws Exception {
+
+        assertEquals(1500, bob.getCurrentBalance());
     }
 }
