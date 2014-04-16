@@ -73,7 +73,11 @@ http://en.wikipedia.org/wiki/Monopoly_(game)
 
 
 AI Opponents
+
 Save Game
+
 GUI - Java FX/Web based
+
 Customisable Board
+
 House Rules
