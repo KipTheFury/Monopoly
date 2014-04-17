@@ -5,6 +5,8 @@ package com.kb.monopoly.game;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.kb.monopoly.board.Board;
 import com.kb.monopoly.player.Player;
 
@@ -16,8 +18,10 @@ import com.kb.monopoly.player.Player;
  */
 public class Game {
 
-    private ArrayList<Player> playerList = new ArrayList<Player>();
-    private Board board;
+    private static final Logger log = Logger.getLogger(Game.class);
+
+    private final ArrayList<Player> playerList = new ArrayList<Player>();
+    private final Board board;
 
     /**
      * Constructor - Set up the board.
@@ -35,6 +39,8 @@ public class Game {
      */
     public void addPlayer(Player player) {
 
+        log.info("Adding Player[" + player + "] to the game");
+
         playerList.add(player);
 
     }
@@ -45,6 +51,7 @@ public class Game {
      * @return - ArrayList of players.
      */
     public ArrayList<Player> getPlayerList() {
+
         return playerList;
     }
 
