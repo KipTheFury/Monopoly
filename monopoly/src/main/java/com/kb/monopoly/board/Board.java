@@ -21,6 +21,8 @@ public class Board {
 
     private static final Logger log = Logger.getLogger(Board.class);
 
+    public static final int MAX_SPACE_INDEX = 39;
+
     private final ArrayList<String> spaces = new ArrayList<String>(40);
 
     private final Collection<String> chanceCards = new ArrayList<String>(16);
