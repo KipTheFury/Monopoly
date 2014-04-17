@@ -82,7 +82,7 @@ public class Board {
     /**
      * Get a collection of all Spaces on the board.
      * 
-     * @return
+     * @return - Collection of all spaces
      */
     public Collection<String> getSpaces() {
 
@@ -92,7 +92,7 @@ public class Board {
     /**
      * Get all chance Cards.
      * 
-     * @return
+     * @return - Collection of all Chance cards.
      */
     public Collection<String> getChanceCards() {
 
@@ -102,7 +102,7 @@ public class Board {
     /**
      * Get all Community Chest Cards.
      * 
-     * @return
+     * @return - Collection of Community Chest cards.
      */
     public Collection<String> getCommunityChestCards() {
 

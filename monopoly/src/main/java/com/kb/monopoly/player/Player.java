@@ -17,7 +17,7 @@ public class Player {
 
     private static final Logger log = Logger.getLogger(Player.class);
 
-    private String name;
+    private final String name;
     private int currentBalance;
     private int currentSpace;
 
@@ -91,7 +91,7 @@ public class Player {
     /**
      * Move to a specific space on the board.
      * 
-     * @param i
+     * @param index
      *            - the index of the space.
      */
     public void moveTo(int index) {
@@ -101,6 +101,59 @@ public class Player {
         }
         else {
             throw new IllegalArgumentException("Invalid Space");
+        }
+
+    }
+
+    /**
+     * Pay money to the bank.
+     * 
+     * @param amount
+     *            - Amount to pay.
+     */
+    public void payBank(int amount) {
+
+        if (amount > 0) {
+
+            log.info("[" + name + "] paid [" + amount + "] to the bank.");
+
+            currentBalance -= amount;
+        } else {
+            throw new IllegalArgumentException("Invalid Amount");
+        }
+    }
+
+    /**
+     * Player receives an amount of money.
+     * 
+     * @param amount
+     *            - Amount to receive.
+     */
+    public void receive(int amount) {
+
+        log.info("[" + name + "] received [" + amount + "]");
+
+        currentBalance += amount;
+    }
+
+    /**
+     * Pay another player an amount of money.
+     * 
+     * @param otherPlayer
+     *            - player to give the money to.
+     * @param amount
+     *            - amount to pay.
+     */
+    public void payPlayer(Player otherPlayer, int amount) {
+
+        if (amount <= currentBalance && amount > 0) {
+            log.info("[" + name + "] paid [" + amount + "] to [" + otherPlayer.getName() + "]");
+
+            currentBalance -= amount;
+            otherPlayer.receive(amount);
+
+        } else {
+            throw new IllegalArgumentException("Not enough Money");
         }
 
     }

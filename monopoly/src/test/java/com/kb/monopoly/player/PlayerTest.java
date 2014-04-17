@@ -15,10 +15,12 @@ import org.junit.Test;
 public class PlayerTest {
 
     private Player bob;
+    private Player jane;
 
     @Before
     public void Setup() {
         bob = new Player("Bob");
+        jane = new Player("Jane");
     }
 
     @Test
@@ -64,7 +66,7 @@ public class PlayerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotMoveToInvalidSpace_gt39() throws Exception {
+    public void cannotMoveToInvalidSpace_indexGreaterThan39() throws Exception {
         bob.moveTo(53);
     }
 
@@ -88,5 +90,45 @@ public class PlayerTest {
     private void passGo(int roll) {
         bob.moveTo(39);
         bob.move(roll);
+    }
+
+    @Test
+    public void canPayBank() throws Exception {
+        int beforeBalance = bob.getCurrentBalance();
+        bob.payBank(300);
+        assertEquals(beforeBalance - 300, bob.getCurrentBalance());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotPayBankLessThanZero() throws Exception {
+        bob.payBank(-100);
+    }
+
+    @Test
+    public void canReceiveMoney() {
+        int beforeBalance = bob.getCurrentBalance();
+        bob.receive(100);
+        assertEquals(beforeBalance + 100, bob.getCurrentBalance());
+    }
+
+    @Test
+    public void canPayPlayer() throws Exception {
+        int bobBeforeBalance = bob.getCurrentBalance();
+        int janeBeforeBalance = jane.getCurrentBalance();
+
+        bob.payPlayer(jane, 100);
+
+        assertEquals(bobBeforeBalance - 100, bob.getCurrentBalance());
+        assertEquals(janeBeforeBalance + 100, jane.getCurrentBalance());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotPayPlayerMoreThanCurrentBalance() throws Exception {
+        bob.payPlayer(jane, bob.getCurrentBalance() + 100);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotPayPlayerLessThanZero() throws Exception {
+        bob.payPlayer(jane, -100);
     }
 }
