@@ -5,7 +5,6 @@ package com.kb.monopoly.board;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 
@@ -28,8 +27,6 @@ public class Board {
     private final Collection<String> chanceCards = new ArrayList<String>(16);
     private final Collection<String> communityChestCards = new ArrayList<String>(
             16);
-
-    private final Random dice = new Random(System.nanoTime());
 
     /**
      * Constructor. Loads the Spaces and Cards
@@ -109,19 +106,4 @@ public class Board {
         return communityChestCards;
     }
 
-    /**
-     * Roll a 6 sided dice and return the result.
-     * 
-     * @return - random result of a 6-sided Dice
-     */
-    public int rollDie() {
-
-        log.info("Rolling Die...");
-
-        int roll = dice.nextInt(5) + 1;
-
-        log.info("[" + roll + "]");
-
-        return roll;
-    }
 }

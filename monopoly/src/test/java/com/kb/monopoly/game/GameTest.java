@@ -17,7 +17,12 @@ import com.kb.monopoly.player.Player;
  */
 public class GameTest {
 
-    Game g;
+    private Game g;
+
+    private Player bob;
+    private Player jane;
+    private Player fred;
+    private Player sally;
 
     /**
      * @throws java.lang.Exception
@@ -25,6 +30,11 @@ public class GameTest {
     @Before
     public void setUp() throws Exception {
         g = new Game();
+
+        bob = new Player("Bob");
+        jane = new Player("Jane");
+        fred = new Player("Fred");
+        sally = new Player("Sally");
     }
 
     @Test
@@ -33,13 +43,46 @@ public class GameTest {
     }
 
     @Test
+    public void canRollDie() throws Exception {
+
+        for (int i = 0; i < 10; i++) {
+            int roll = g.rollDie();
+            assertTrue(roll >= 1 && roll <= 6);
+        }
+    }
+
+    @Test
     public void canAddPlayer() throws Exception {
 
-        Player bob = new Player("Bob");
+        g.addPlayer(bob);
+        assertTrue(g.getPlayerList().contains(bob));
+    }
+
+    @Test
+    public void canStartGame() throws Exception {
 
         g.addPlayer(bob);
+        g.addPlayer(jane);
 
-        assertTrue(g.getPlayerList().contains(bob));
+        g.startGame();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotStartAGameWithLessThan2Players() throws Exception {
+
+        g.addPlayer(bob);
+        g.startGame();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotStartAGameWithMoreThan4Players() throws Exception {
+        g.addPlayer(bob);
+        g.addPlayer(jane);
+        g.addPlayer(fred);
+        g.addPlayer(sally);
+        g.addPlayer(new Player("George"));
+
+        g.startGame();
     }
 
 }

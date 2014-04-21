@@ -4,7 +4,6 @@
 package com.kb.monopoly.board;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,14 +48,4 @@ public class BoardTest {
 
         assertEquals("Go", b.getSpace(0));
     }
-
-    @Test
-    public void canRollDie() throws Exception {
-
-        for (int i = 0; i < 10; i++) {
-            int roll = b.rollDie();
-            assertTrue(roll >= 1 && roll <= 6);
-        }
-    }
-
 }

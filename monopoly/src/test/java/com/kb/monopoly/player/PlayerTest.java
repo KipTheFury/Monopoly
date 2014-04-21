@@ -95,13 +95,24 @@ public class PlayerTest {
     @Test
     public void canPayBank() throws Exception {
         int beforeBalance = bob.getCurrentBalance();
-        bob.payBank(300);
+        bob.pay(300, false);
         assertEquals(beforeBalance - 300, bob.getCurrentBalance());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotPayBankLessThanZero() throws Exception {
-        bob.payBank(-100);
+        bob.pay(-100, false);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotPayBankMoreThanBalance_NonCompulsoryPayment() throws Exception {
+        bob.pay(bob.getCurrentBalance() + 100, false);
+    }
+
+    @Test
+    public void canPayBankMoreThanBalance_CompulsoryPayment() throws Exception {
+        bob.pay(bob.getCurrentBalance() + 100, true);
+        assertEquals(-100, bob.getCurrentBalance());
     }
 
     @Test
@@ -116,19 +127,33 @@ public class PlayerTest {
         int bobBeforeBalance = bob.getCurrentBalance();
         int janeBeforeBalance = jane.getCurrentBalance();
 
-        bob.payPlayer(jane, 100);
+        bob.pay(jane, 100, false);
 
         assertEquals(bobBeforeBalance - 100, bob.getCurrentBalance());
         assertEquals(janeBeforeBalance + 100, jane.getCurrentBalance());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotPayPlayerMoreThanCurrentBalance() throws Exception {
-        bob.payPlayer(jane, bob.getCurrentBalance() + 100);
+    public void cannotPayPlayerMoreThanCurrentBalance_NonCompulsoryPayment() throws Exception {
+        bob.pay(jane, bob.getCurrentBalance() + 100, false);
+    }
+
+    @Test
+    public void canPayPlayerMoreThanCurrentBalance_CompulsoryPayment() throws Exception {
+
+        int bobBeforeBalance = bob.getCurrentBalance();
+        int janeBeforeBalance = jane.getCurrentBalance();
+
+        int paymentAmount = bobBeforeBalance + 100;
+
+        bob.pay(jane, paymentAmount, true);
+
+        assertEquals(bobBeforeBalance - paymentAmount, bob.getCurrentBalance());
+        assertEquals(janeBeforeBalance + paymentAmount, jane.getCurrentBalance());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotPayPlayerLessThanZero() throws Exception {
-        bob.payPlayer(jane, -100);
+        bob.pay(jane, -100, false);
     }
 }

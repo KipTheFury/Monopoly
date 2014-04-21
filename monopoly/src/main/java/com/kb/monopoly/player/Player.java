@@ -106,21 +106,52 @@ public class Player {
     }
 
     /**
-     * Pay money to the bank.
+     * Pay money to the bank. The player cannot optionally pay more than their current balance.
+     * Paying a fine or rent to another player must be paid and can take the players balance below
+     * zero.
      * 
      * @param amount
      *            - Amount to pay.
+     * @param compulsory
+     *            - fines and rent must be paid.
      */
-    public void payBank(int amount) {
+    public void pay(int amount, boolean compulsory) {
 
         if (amount > 0) {
 
-            log.info("[" + name + "] paid [" + amount + "] to the bank.");
+            if (compulsory) {
+                log.info("[" + name + "] paid [" + amount + "] to the bank.");
 
-            currentBalance -= amount;
+                currentBalance -= amount;
+            } else {
+
+                if ((currentBalance - amount) > 0) {
+                    log.info("[" + name + "] paid [" + amount + "] to the bank.");
+
+                    currentBalance -= amount;
+                } else {
+                    throw new IllegalArgumentException("Not enough money to complete the transaction");
+                }
+            }
+
         } else {
             throw new IllegalArgumentException("Invalid Amount");
         }
+    }
+
+    /**
+     * Pay another player an amount of money.
+     * 
+     * @param otherPlayer
+     *            - player to give the money to.
+     * @param amount
+     *            - amount to pay.
+     * @param compulsory
+     *            - fines and rent must be paid.
+     */
+    public void pay(Player otherPlayer, int amount, boolean compulsory) {
+        pay(amount, compulsory);
+        otherPlayer.receive(amount);
     }
 
     /**
@@ -136,26 +167,14 @@ public class Player {
         currentBalance += amount;
     }
 
-    /**
-     * Pay another player an amount of money.
+    /*
+     * (non-Javadoc)
      * 
-     * @param otherPlayer
-     *            - player to give the money to.
-     * @param amount
-     *            - amount to pay.
+     * @see java.lang.Object#toString()
      */
-    public void payPlayer(Player otherPlayer, int amount) {
-
-        if (amount <= currentBalance && amount > 0) {
-            log.info("[" + name + "] paid [" + amount + "] to [" + otherPlayer.getName() + "]");
-
-            currentBalance -= amount;
-            otherPlayer.receive(amount);
-
-        } else {
-            throw new IllegalArgumentException("Not enough Money");
-        }
-
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

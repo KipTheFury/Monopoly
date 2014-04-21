@@ -4,6 +4,7 @@
 package com.kb.monopoly.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 
@@ -22,6 +23,8 @@ public class Game {
 
     private final ArrayList<Player> playerList = new ArrayList<Player>();
     private final Board board;
+
+    private final Random dice = new Random(System.nanoTime());
 
     /**
      * Constructor - Set up the board.
@@ -63,6 +66,34 @@ public class Game {
     public Object getBoard() {
 
         return board;
+    }
+
+    /**
+     * Roll a 6 sided dice and return the result.
+     * 
+     * @return - random result of a 6-sided Dice
+     */
+    public int rollDie() {
+
+        log.info("Rolling Die...");
+
+        int roll = dice.nextInt(5) + 1;
+
+        log.info("[" + roll + "]");
+
+        return roll;
+    }
+
+    /**
+     * Start a Game
+     */
+    public void startGame() {
+
+        if (playerList.size() >= 2 && playerList.size() <= 4) {
+            log.info("===== Starting Game =====");
+        } else {
+            throw new IllegalStateException("Not enough players to start a Game");
+        }
     }
 
 }
