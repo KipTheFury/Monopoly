@@ -24,7 +24,12 @@ public class Game {
     private final ArrayList<Player> playerList = new ArrayList<Player>();
     private final Board board;
 
-    private final Random dice = new Random(System.nanoTime());
+    private Random dice = new Random(System.nanoTime());
+
+    private int currentPlayerIndex = 0;
+    private int currentTurn = 1;
+
+    private Player currentPlayer;
 
     /**
      * Constructor - Set up the board.
@@ -75,11 +80,9 @@ public class Game {
      */
     public int rollDie() {
 
-        log.info("Rolling Die...");
-
         int roll = dice.nextInt(5) + 1;
 
-        log.info("[" + roll + "]");
+        log.info("Roll... [" + roll + "]");
 
         return roll;
     }
@@ -91,9 +94,85 @@ public class Game {
 
         if (playerList.size() >= 2 && playerList.size() <= 4) {
             log.info("===== Starting Game =====");
+
+            currentPlayer = rollForFirstTurn();
+            currentPlayerIndex = playerList.indexOf(currentPlayer);
+
+            startTurn(currentPlayer);
+
         } else {
             throw new IllegalStateException("Not enough players to start a Game");
         }
     }
 
+    /**
+     * Start a new turn for the current player.
+     * 
+     * @param currentPlayer
+     */
+    private void startTurn(Player currentPlayer) {
+
+        log.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
+    }
+
+    /**
+     * End the current Turn and move to the next Player
+     */
+    public void endTurn() {
+
+        log.info("----- Ending Turn - " + currentPlayer + " - Turn " + currentTurn + " -----");
+
+        if (++currentPlayerIndex == playerList.size()) {
+            currentPlayerIndex = 0;
+            currentTurn++;
+        }
+
+        currentPlayer = playerList.get(currentPlayerIndex);
+
+        startTurn(currentPlayer);
+    }
+
+    /**
+     * @return
+     */
+    public Player rollForFirstTurn() {
+
+        int highestRoll = 0;
+        Player first = null;
+
+        for (Player player : playerList) {
+
+            int roll = rollDie();
+
+            if (roll > highestRoll) {
+                highestRoll = roll;
+                first = player;
+            }
+        }
+
+        return first;
+    }
+
+    /**
+     * @return the currentPlayer.
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * @return the Current turn number
+     */
+    public int getCurrentTurn() {
+
+        return currentTurn;
+    }
+
+    /**
+     * @param dice
+     *            the dice to set
+     */
+    public void setDice(Random dice) {
+        this.dice = dice;
+    }
 }

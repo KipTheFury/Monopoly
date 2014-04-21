@@ -72,6 +72,7 @@ public class Player {
     public void move(int roll) {
 
         if (roll < 2 || roll > 12) {
+            log.error("Invalid Roll");
             throw new IllegalArgumentException("Invalid Roll");
         }
 
@@ -85,7 +86,6 @@ public class Player {
             currentBalance += 200;
 
         }
-
     }
 
     /**

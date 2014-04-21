@@ -3,10 +3,17 @@
  */
 package com.kb.monopoly.game;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Random;
+
+import org.easymock.EasyMock;
+import org.easymock.Mock;
+import org.easymock.TestSubject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.kb.monopoly.player.Player;
@@ -17,11 +24,16 @@ import com.kb.monopoly.player.Player;
  */
 public class GameTest {
 
+    @TestSubject
     private Game g;
 
+    @Mock
     private Player bob;
+    @Mock
     private Player jane;
+    @Mock
     private Player fred;
+    @Mock
     private Player sally;
 
     /**
@@ -52,13 +64,6 @@ public class GameTest {
     }
 
     @Test
-    public void canAddPlayer() throws Exception {
-
-        g.addPlayer(bob);
-        assertTrue(g.getPlayerList().contains(bob));
-    }
-
-    @Test
     public void canStartGame() throws Exception {
 
         g.addPlayer(bob);
@@ -83,6 +88,46 @@ public class GameTest {
         g.addPlayer(new Player("George"));
 
         g.startGame();
+    }
+
+    @Test
+    @Ignore("Need to fix mocking")
+    public void canRollForFirstTurn() throws Exception {
+
+        g.addPlayer(bob);
+        g.addPlayer(jane);
+        g.addPlayer(fred);
+        g.addPlayer(sally);
+
+        Random mockDice = EasyMock.createMock(Random.class);
+
+        g.setDice(mockDice);
+
+        EasyMock.expect(g.rollDie()).andReturn(1);
+        EasyMock.expect(g.rollDie()).andReturn(1);
+        EasyMock.expect(g.rollDie()).andReturn(3);
+        EasyMock.expect(g.rollDie()).andReturn(1);
+
+        EasyMock.replay(mockDice);
+
+        g.startGame();
+
+        assertEquals(fred, g.getCurrentPlayer());
+    }
+
+    @Test
+    public void turnNumberIncrementsAfterAllPlayersHaveEndedTurns() throws Exception {
+
+        g.addPlayer(bob);
+        g.addPlayer(jane);
+
+        g.startGame();
+
+        int currentTurnNumber = g.getCurrentTurn();
+        g.endTurn();
+        g.endTurn();
+
+        assertEquals(currentTurnNumber + 1, g.getCurrentTurn());
     }
 
 }
