@@ -6,12 +6,8 @@ package com.kb.monopoly.game;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
-import java.util.Random;
-
-import org.easymock.EasyMock;
-import org.easymock.Mock;
-import org.easymock.TestSubject;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,16 +20,11 @@ import com.kb.monopoly.player.Player;
  */
 public class GameTest {
 
-    @TestSubject
     private Game g;
 
-    @Mock
     private Player bob;
-    @Mock
     private Player jane;
-    @Mock
     private Player fred;
-    @Mock
     private Player sally;
 
     /**
@@ -47,6 +38,7 @@ public class GameTest {
         jane = new Player("Jane");
         fred = new Player("Fred");
         sally = new Player("Sally");
+
     }
 
     @Test
@@ -91,7 +83,7 @@ public class GameTest {
     }
 
     @Test
-    @Ignore("Need to fix mocking")
+    @Ignore
     public void canRollForFirstTurn() throws Exception {
 
         g.addPlayer(bob);
@@ -99,16 +91,7 @@ public class GameTest {
         g.addPlayer(fred);
         g.addPlayer(sally);
 
-        Random mockDice = EasyMock.createMock(Random.class);
-
-        g.setDice(mockDice);
-
-        EasyMock.expect(g.rollDie()).andReturn(1);
-        EasyMock.expect(g.rollDie()).andReturn(1);
-        EasyMock.expect(g.rollDie()).andReturn(3);
-        EasyMock.expect(g.rollDie()).andReturn(1);
-
-        EasyMock.replay(mockDice);
+        when(g.rollDie()).thenReturn(1, 1, 3, 1);
 
         g.startGame();
 
