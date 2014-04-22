@@ -4,7 +4,6 @@
 package com.kb.monopoly.game;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 
@@ -24,7 +23,7 @@ public class Game {
     private final ArrayList<Player> playerList = new ArrayList<Player>();
     private final Board board;
 
-    private Random dice = new Random(System.nanoTime());
+    private Dice dice = new Dice();
 
     private int currentPlayerIndex = 0;
     private int currentTurn = 1;
@@ -79,12 +78,7 @@ public class Game {
      * @return - random result of a 6-sided Dice
      */
     public int rollDie() {
-
-        int roll = dice.nextInt(5) + 1;
-
-        log.info("Roll... [" + roll + "]");
-
-        return roll;
+        return dice.roll();
     }
 
     /**
@@ -169,10 +163,9 @@ public class Game {
     }
 
     /**
-     * @param dice
-     *            the dice to set
+     * @param mockDice
      */
-    public void setDice(Random dice) {
+    public void setDice(Dice dice) {
         this.dice = dice;
     }
 }

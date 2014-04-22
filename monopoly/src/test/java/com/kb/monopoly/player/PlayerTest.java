@@ -4,9 +4,12 @@
 package com.kb.monopoly.player;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.kb.monopoly.board.Ownable;
 
 /**
  * @author kbennett
@@ -17,10 +20,14 @@ public class PlayerTest {
     private Player bob;
     private Player jane;
 
+    private Ownable kingscross;
+
     @Before
     public void Setup() {
         bob = new Player("Bob");
         jane = new Player("Jane");
+
+        kingscross = new Ownable("Kings Cross", 200);
     }
 
     @Test
@@ -155,5 +162,33 @@ public class PlayerTest {
     @Test(expected = IllegalArgumentException.class)
     public void cannotPayPlayerLessThanZero() throws Exception {
         bob.pay(jane, -100, false);
+    }
+
+    @Test
+    public void canBuyProperty() throws Exception {
+
+        int bobBeforeBalance = bob.getCurrentBalance();
+
+        bob.buy(kingscross);
+
+        assertTrue(bob.getInventory().contains(kingscross));
+        assertEquals(bobBeforeBalance - kingscross.getValue(), bob.getCurrentBalance());
+        assertEquals(bob, kingscross.getOwner());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotBuyProperty_insufficientFunds() throws Exception {
+
+        bob.pay(bob.getCurrentBalance() - 10, true);
+
+        bob.buy(kingscross);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotBuyProperty_alreadyOwned() throws Exception {
+
+        jane.buy(kingscross);
+
+        bob.buy(kingscross);
     }
 }

@@ -6,10 +6,12 @@ package com.kb.monopoly.game;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.kb.monopoly.player.Player;
@@ -64,6 +66,17 @@ public class GameTest {
         g.startGame();
     }
 
+    @Test
+    public void canGetPlayerList() throws Exception {
+
+        g.addPlayer(bob);
+        g.addPlayer(jane);
+
+        ArrayList<Player> players = g.getPlayerList();
+
+        assertTrue(players.contains(bob) && players.contains(jane));
+    }
+
     @Test(expected = IllegalStateException.class)
     public void cannotStartAGameWithLessThan2Players() throws Exception {
 
@@ -83,15 +96,17 @@ public class GameTest {
     }
 
     @Test
-    @Ignore
     public void canRollForFirstTurn() throws Exception {
+
+        Dice mockDice = mock(Dice.class);
+        g.setDice(mockDice);
 
         g.addPlayer(bob);
         g.addPlayer(jane);
         g.addPlayer(fred);
         g.addPlayer(sally);
 
-        when(g.rollDie()).thenReturn(1, 1, 3, 1);
+        when(mockDice.roll()).thenReturn(1, 1, 3, 1);
 
         g.startGame();
 
@@ -101,14 +116,25 @@ public class GameTest {
     @Test
     public void turnNumberIncrementsAfterAllPlayersHaveEndedTurns() throws Exception {
 
+        Dice mockDice = mock(Dice.class);
+        g.setDice(mockDice);
+
         g.addPlayer(bob);
         g.addPlayer(jane);
+
+        when(mockDice.roll()).thenReturn(6, 1);
 
         g.startGame();
 
         int currentTurnNumber = g.getCurrentTurn();
+
+        assertEquals(bob, g.getCurrentPlayer());
+
         g.endTurn();
+        assertEquals(jane, g.getCurrentPlayer());
+
         g.endTurn();
+        assertEquals(bob, g.getCurrentPlayer());
 
         assertEquals(currentTurnNumber + 1, g.getCurrentTurn());
     }

@@ -3,9 +3,12 @@
  */
 package com.kb.monopoly.player;
 
+import java.util.ArrayList;
+
 import org.apache.log4j.Logger;
 
 import com.kb.monopoly.board.Board;
+import com.kb.monopoly.board.Ownable;
 
 /**
  * A player.
@@ -20,6 +23,8 @@ public class Player {
     private final String name;
     private int currentBalance;
     private int currentSpace;
+
+    private final ArrayList<Ownable> inventory = new ArrayList<Ownable>();
 
     /**
      * Constructor
@@ -60,6 +65,13 @@ public class Player {
     public int getCurrentSpace() {
 
         return currentSpace;
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Ownable> getInventory() {
+        return inventory;
     }
 
     /**
@@ -115,7 +127,7 @@ public class Player {
      * @param compulsory
      *            - fines and rent must be paid.
      */
-    public void pay(int amount, boolean compulsory) {
+    public void pay(int amount, boolean compulsory) throws IllegalArgumentException {
 
         if (amount > 0) {
 
@@ -165,6 +177,31 @@ public class Player {
         log.info("[" + name + "] received [" + amount + "]");
 
         currentBalance += amount;
+    }
+
+    /**
+     * @param property
+     */
+    public void buy(Ownable property) {
+
+        if (property.getOwner() == null) {
+            try {
+                pay(property.getValue(), false);
+                inventory.add(property);
+                property.setOwner(this);
+
+                log.info("[" + name + "] bought [" + property + "]");
+
+            } catch (IllegalArgumentException iae) {
+
+                log.error("Can't buy [" + property + "] - Not enough money!");
+
+                throw new IllegalArgumentException("Cannot buy [" + property + "] - Not enough money", iae);
+            }
+        } else {
+            throw new IllegalStateException("Cannot buy [" + property + "] - Already Owned by [" + property.getOwner()
+                    + "]");
+        }
     }
 
     /*

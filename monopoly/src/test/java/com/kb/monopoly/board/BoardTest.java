@@ -46,6 +46,6 @@ public class BoardTest {
     @Test
     public void firstSpaceIsGo() throws Exception {
 
-        assertEquals("Go", b.getSpace(0));
+        assertEquals("Go", b.getSpace(Board.GO).getName());
     }
 }
