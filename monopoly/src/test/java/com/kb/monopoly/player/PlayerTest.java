@@ -27,7 +27,7 @@ public class PlayerTest {
         bob = new Player("Bob");
         jane = new Player("Jane");
 
-        kingscross = new Ownable("Kings Cross", 200);
+        kingscross = new Ownable("Kings Cross", 200, 100);
     }
 
     @Test

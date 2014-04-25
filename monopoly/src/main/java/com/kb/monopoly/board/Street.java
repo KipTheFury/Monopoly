@@ -19,8 +19,9 @@ public class Street extends Ownable {
 
     private final int[] rentLevels;
 
-    public Street(String name, int value, PropertySets.SetColour setColour, int buildingCost, int[] rent) {
-        super(name, value);
+    public Street(String name, int value, int mortgageValue, PropertySets.SetColour setColour, int buildingCost,
+            int[] rent) {
+        super(name, value, mortgageValue);
 
         this.setColour = setColour;
         this.buildingCost = buildingCost;
@@ -86,6 +87,10 @@ public class Street extends Ownable {
     public int getBuildingCost() {
 
         return buildingCost;
+    }
+
+    public PropertySets.SetColour getSetColour() {
+        return setColour;
     }
 
 }

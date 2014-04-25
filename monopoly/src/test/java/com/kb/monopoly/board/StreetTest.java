@@ -23,12 +23,12 @@ public class StreetTest {
      */
     @Before
     public void setUp() throws Exception {
-        mayfair = new Street("Mayfair", 350, SetColour.DarkBlue, 50, new int[] { 50, 200, 600, 1400, 1700, 2000 });
+        mayfair = new Street("Mayfair", 350, 100, SetColour.DarkBlue, 50, new int[] { 50, 200, 600, 1400, 1700, 2000 });
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void cannotCreateStreetWithInvalidRentLevels() throws Exception {
-        mayfair = new Street("Mayfair", 350, SetColour.DarkBlue, 50, new int[] { 50, 200, 600, 1400 });
+        mayfair = new Street("Mayfair", 350, 100, SetColour.DarkBlue, 50, new int[] { 50, 200, 600, 1400 });
     }
 
     @Test

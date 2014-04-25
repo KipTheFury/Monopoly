@@ -7,6 +7,8 @@
 package com.kb.monopoly.board;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ public class OwnableTest {
 
     @Before
     public void setUp() throws Exception {
-        kingsCross = new Ownable("Kings Cross Station", 200);
+        kingsCross = new Ownable("Kings Cross Station", 200, 100);
     }
 
     @Test
@@ -29,4 +31,17 @@ public class OwnableTest {
         assertEquals(200, kingsCross.getValue());
     }
 
+    @Test
+    public void canGetMortgageValue() throws Exception {
+        assertEquals(100, kingsCross.getMortgageValue());
+    }
+
+    @Test
+    public void canMortgage() throws Exception {
+        kingsCross.mortgage(true);
+        assertTrue(kingsCross.isMortgaged());
+
+        kingsCross.mortgage(false);
+        assertFalse(kingsCross.isMortgaged());
+    }
 }
