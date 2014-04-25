@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.kb.monopoly.board.PropertySets.SetColour;
+import com.kb.monopoly.player.Player;
 
 /**
  * @author kbennett
@@ -60,6 +61,8 @@ public class StreetTest {
 
     @Test
     public void canCalculateRent() throws Exception {
+
+        mayfair.setOwner(new Player("Bob"));
 
         assertEquals(50, mayfair.calculateRent());
         mayfair.addHouse();

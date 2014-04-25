@@ -19,11 +19,11 @@ import org.junit.Test;
  */
 public class OwnableTest {
 
-    private Ownable kingsCross;
+    private Station kingsCross;
 
     @Before
     public void setUp() throws Exception {
-        kingsCross = new Ownable("Kings Cross Station", 200, 100);
+        kingsCross = new Station("Kings Cross Station");
     }
 
     @Test

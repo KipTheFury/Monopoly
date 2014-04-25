@@ -67,10 +67,16 @@ public class Street extends Ownable {
 
     /**
      * @return
+     * @throws IllegalAccessException
      */
-    public int calculateRent() {
+    @Override
+    public int calculateRent() throws IllegalAccessException {
 
-        return rentLevels[buildingCount];
+        if (ownedBy != null) {
+            return rentLevels[buildingCount];
+        } else {
+            throw new IllegalAccessException("No-one owns " + name);
+        }
     }
 
     /**

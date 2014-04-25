@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.kb.monopoly.board.Ownable;
+import com.kb.monopoly.board.Station;
 
 /**
  * @author kbennett
@@ -27,7 +28,7 @@ public class PlayerTest {
         bob = new Player("Bob");
         jane = new Player("Jane");
 
-        kingscross = new Ownable("Kings Cross", 200, 100);
+        kingscross = new Station("Kings Cross");
     }
 
     @Test
@@ -190,5 +191,68 @@ public class PlayerTest {
         jane.buy(kingscross);
 
         bob.buy(kingscross);
+    }
+
+    @Test
+    public void canMortgageProperty() throws Exception {
+
+        bob.buy(kingscross);
+
+        int bobBeforeBalance = bob.getCurrentBalance();
+
+        bob.mortgage(kingscross);
+
+        assertEquals(bobBeforeBalance + kingscross.getMortgageValue(), bob.getCurrentBalance());
+
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotMortgagePropertyNotOwned() throws Exception {
+        bob.mortgage(kingscross);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotMortgageMortgagedProperty() throws Exception {
+
+        bob.buy(kingscross);
+        bob.mortgage(kingscross);
+
+        bob.mortgage(kingscross);
+    }
+
+    @Test
+    public void canUnmortgageProperty() throws Exception {
+
+        bob.buy(kingscross);
+        bob.mortgage(kingscross);
+
+        int bobBeforeBalance = bob.getCurrentBalance();
+
+        bob.unmortgage(kingscross);
+
+        assertEquals(bobBeforeBalance - kingscross.getMortgageValue(), bob.getCurrentBalance());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotUnmortgageProperty_insufficientFunds() throws Exception {
+
+        bob.buy(kingscross);
+        bob.mortgage(kingscross);
+
+        bob.pay(bob.getCurrentBalance() - 1, true);
+
+        bob.unmortgage(kingscross);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotUnmortgagePropertyNotOwned() throws Exception {
+        bob.unmortgage(kingscross);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void cannotUnmortgageNonMortgagedProperty() throws Exception {
+
+        bob.buy(kingscross);
+        bob.unmortgage(kingscross);
     }
 }

@@ -12,12 +12,12 @@ import com.kb.monopoly.player.Player;
  * @author Kyle
  * 
  */
-public class Ownable extends Space {
+public abstract class Ownable extends Space {
 
-    private final int value;
-    private Player ownedBy = null;
-    private int mortgageValue;
-    private boolean mortgaged;
+    protected final int value;
+    protected Player ownedBy = null;
+    protected final int mortgageValue;
+    protected boolean mortgaged;
 
     /**
      * Constructor.
@@ -32,6 +32,8 @@ public class Ownable extends Space {
         this.value = value;
         this.mortgageValue = mortgageValue;
     }
+
+    public abstract int calculateRent() throws IllegalAccessException;
 
     /**
      * Get the value of the space

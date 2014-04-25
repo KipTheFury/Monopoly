@@ -204,6 +204,51 @@ public class Player {
         }
     }
 
+    /**
+     * @param property
+     */
+    public void mortgage(Ownable property) {
+
+        if (inventory.contains(property)) {
+
+            if (!property.isMortgaged()) {
+
+                property.mortgage(true);
+                receive(property.getMortgageValue());
+
+            } else {
+                throw new IllegalStateException(property.getName() + " has already been mortgaged.");
+            }
+        } else {
+            throw new IllegalStateException("Cannot mortgage a Property you don't own.");
+        }
+    }
+
+    /**
+     * @param property
+     */
+    public void unmortgage(Ownable property) {
+
+        if (inventory.contains(property)) {
+
+            if (property.isMortgaged()) {
+
+                try {
+                    pay(property.getMortgageValue(), false);
+                    property.mortgage(false);
+                } catch (IllegalArgumentException iae) {
+                    throw new IllegalArgumentException("Insufficient funds to unmortgage " + property.getName(), iae);
+                }
+
+            } else {
+                throw new IllegalStateException(property.getName() + " has not been mortgaged.");
+            }
+        } else {
+            throw new IllegalStateException("Cannot unmortgage a Property you don't own.");
+        }
+
+    }
+
     /*
      * (non-Javadoc)
      * 

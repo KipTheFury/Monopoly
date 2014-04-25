@@ -12,7 +12,7 @@ package com.kb.monopoly.board;
  */
 public class Space {
 
-    private final String name;
+    protected final String name;
 
     /**
      * Constructor.
