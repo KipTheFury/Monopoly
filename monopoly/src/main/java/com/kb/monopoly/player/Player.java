@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.kb.monopoly.board.Board;
-import com.kb.monopoly.board.Ownable;
+import com.kb.monopoly.board.Property;
 
 /**
  * A player.
@@ -24,7 +24,7 @@ public class Player {
     private int currentBalance;
     private int currentSpace;
 
-    private final ArrayList<Ownable> inventory = new ArrayList<Ownable>();
+    private final ArrayList<Property> inventory = new ArrayList<Property>();
 
     /**
      * Constructor
@@ -68,9 +68,11 @@ public class Player {
     }
 
     /**
+     * Return a list of properties owned by this player.
+     * 
      * @return
      */
-    public ArrayList<Ownable> getInventory() {
+    public ArrayList<Property> getInventory() {
         return inventory;
     }
 
@@ -180,9 +182,13 @@ public class Player {
     }
 
     /**
+     * Buy a property, add it to inventory provided the player can afford it and it is not already
+     * owned by another player.
+     * 
      * @param property
+     *            - the property to buy.
      */
-    public void buy(Ownable property) {
+    public void buy(Property property) {
 
         if (property.getOwner() == null) {
             try {
@@ -205,9 +211,12 @@ public class Player {
     }
 
     /**
+     * Mortgage a property owned by the player, player receives the mortgage value of the property/
+     * 
      * @param property
+     *            - the property to mortgage.
      */
-    public void mortgage(Ownable property) {
+    public void mortgage(Property property) {
 
         if (inventory.contains(property)) {
 
@@ -225,9 +234,12 @@ public class Player {
     }
 
     /**
+     * Un-mortgage a mortgaged property. Player must pay the mortgage value of the property.
+     * 
      * @param property
+     *            - property to unmortgage.
      */
-    public void unmortgage(Ownable property) {
+    public void unmortgage(Property property) {
 
         if (inventory.contains(property)) {
 

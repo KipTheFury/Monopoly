@@ -7,7 +7,7 @@ package com.kb.monopoly.board;
  * @author kbennett
  * 
  */
-public class Street extends Ownable {
+public class Street extends Property {
 
     private static final int MAX_HOUSES = 4;
 
@@ -19,6 +19,22 @@ public class Street extends Ownable {
 
     private final int[] rentLevels;
 
+    /**
+     * Constructor.
+     * 
+     * @param name
+     *            - name of the street.
+     * @param value
+     *            - value of the street.
+     * @param mortgageValue
+     *            - mortgage value of the street.
+     * @param setColour
+     *            - property set the street belongs to.
+     * @param buildingCost
+     *            - the cost of adding houses/hotels.
+     * @param rent
+     *            - the different levels of rent for this street.
+     */
     public Street(String name, int value, int mortgageValue, PropertySets.SetColour setColour, int buildingCost,
             int[] rent) {
         super(name, value, mortgageValue);
@@ -36,7 +52,7 @@ public class Street extends Ownable {
     }
 
     /**
-     * 
+     * Add a house to this street, cannot add more than 4.
      */
     public void addHouse() {
 
@@ -48,7 +64,7 @@ public class Street extends Ownable {
     }
 
     /**
-     * 
+     * Add a hotel to this street, only after 4 houses have been built.
      */
     public void addHotel() {
 
@@ -65,9 +81,10 @@ public class Street extends Ownable {
         }
     }
 
-    /**
-     * @return
-     * @throws IllegalAccessException
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.kb.monopoly.board.Property#calculateRent()
      */
     @Override
     public int calculateRent() throws IllegalAccessException {
@@ -80,7 +97,11 @@ public class Street extends Ownable {
     }
 
     /**
-     * @return
+     * Get the number of buildings added to this street
+     * 
+     * 0-4 houses 5 Hotel
+     * 
+     * @return the building count.
      */
     public int getBuildingCount() {
 
@@ -88,13 +109,20 @@ public class Street extends Ownable {
     }
 
     /**
-     * @return
+     * Get the cost of adding a house or a hotel to the street.
+     * 
+     * @return - cost of adding a house/hotel.
      */
     public int getBuildingCost() {
 
         return buildingCost;
     }
 
+    /**
+     * Get the set this property belongs to.
+     * 
+     * @return - set colour.
+     */
     public PropertySets.SetColour getSetColour() {
         return setColour;
     }

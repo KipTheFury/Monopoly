@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.Ownable;
+import com.kb.monopoly.board.Property;
 import com.kb.monopoly.board.Station;
 
 /**
@@ -21,7 +21,7 @@ public class PlayerTest {
     private Player bob;
     private Player jane;
 
-    private Ownable kingscross;
+    private Property kingscross;
 
     @Before
     public void Setup() {

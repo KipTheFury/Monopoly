@@ -12,7 +12,7 @@ import com.kb.monopoly.player.Player;
  * @author Kyle
  * 
  */
-public abstract class Ownable extends Space {
+public abstract class Property extends Space {
 
     protected final int value;
     protected Player ownedBy = null;
@@ -27,12 +27,21 @@ public abstract class Ownable extends Space {
      * @param value
      *            - The value of the space
      */
-    public Ownable(String name, int value, int mortgageValue) {
+    public Property(String name, int value, int mortgageValue) {
         super(name);
         this.value = value;
         this.mortgageValue = mortgageValue;
     }
 
+    /**
+     * Calculate the amount of rent that must be paid to the owner of this property.
+     * 
+     * Depends on different factors such as number of houses/hotels, etc depending on the type of
+     * property.
+     * 
+     * @return The amount of rent to be paid to the owner.
+     * @throws IllegalAccessException
+     */
     public abstract int calculateRent() throws IllegalAccessException;
 
     /**
@@ -46,7 +55,9 @@ public abstract class Ownable extends Space {
     }
 
     /**
-     * @return
+     * If this property has been bought by a player return the player, otherwise returns null.
+     * 
+     * @return - the player who owns this property.
      */
     public Player getOwner() {
 
@@ -54,22 +65,40 @@ public abstract class Ownable extends Space {
     }
 
     /**
+     * Set the owner of this property following a purchase or a trade.
+     * 
      * @param player
+     *            - new owner of this property.
      */
     public void setOwner(Player player) {
 
         this.ownedBy = player;
     }
 
+    /**
+     * Set the property's mortgage status, true to mortgage, false to un-mortgage.
+     * 
+     * @param mortgaged
+     */
     public void mortgage(boolean mortgaged) {
         this.mortgaged = mortgaged;
 
     }
 
+    /**
+     * Get the value mortgaging this property.
+     * 
+     * @return - the mortgage value
+     */
     public int getMortgageValue() {
         return mortgageValue;
     }
 
+    /**
+     * Check whether this property has been mortgaged.
+     * 
+     * @return - this property's mortgage status.
+     */
     public boolean isMortgaged() {
         return mortgaged;
     }

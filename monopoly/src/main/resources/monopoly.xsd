@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/monopoly" xmlns:tns="http://www.example.org/monopoly" elementFormDefault="qualified">
+
+
+	<element name="Properties" type="tns:Properties"></element>
+
+	<complexType name="Properties">
+		<sequence>
+			<element name="PropertySets" type="tns:PropertySet"
+				maxOccurs="8" minOccurs="8">
+			</element>
+			<element name="Stations" type="tns:Station" maxOccurs="4"
+				minOccurs="4">
+			</element>
+			<element name="Utilities" type="tns:Utility" maxOccurs="2"
+				minOccurs="2">
+			</element>
+		</sequence>
+	</complexType>
+
+	<element name="PropertySet" type="tns:PropertySet"></element>
+    
+    <complexType name="PropertySet">
+    	<sequence>
+    		<element name="Street" type="tns:Street" maxOccurs="3" minOccurs="2"></element>
+    	</sequence>
+    	<attribute name="Colour" type="string"></attribute>
+    </complexType>
+
+    <complexType name="Street">
+    	<sequence>
+    		<element name="RentLevels" type="tns:RentLevels"></element>
+    	</sequence>
+    	<attribute name="Name" type="string"></attribute>
+    	<attribute name="BoardIndex" type="int"></attribute>
+    	<attribute name="Value" type="int"></attribute>
+    	<attribute name="MortgageValue" type="int"></attribute>
+    </complexType>
+    
+    <complexType name="RentLevels">
+    	<sequence>
+    		<element name="Base" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="OneHouse" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="TwoHouse" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="ThreeHouse" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="FourHouse" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Hotel" type="int" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Station">
+    	<attribute name="Name" type="string"></attribute>
+    </complexType>
+    
+    <complexType name="Utility">
+    	<attribute name="Name" type="string"></attribute>
+    </complexType>
+    
+</schema>

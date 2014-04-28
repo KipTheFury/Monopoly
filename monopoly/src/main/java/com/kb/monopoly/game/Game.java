@@ -127,7 +127,9 @@ public class Game {
     }
 
     /**
-     * @return
+     * Each player rolls a dice, return the player who scored the highest to take the first turn.
+     * 
+     * @return - player with the highest dice roll.
      */
     public Player rollForFirstTurn() {
 
@@ -163,7 +165,11 @@ public class Game {
     }
 
     /**
-     * @param mockDice
+     * Set the dice to use.
+     * 
+     * For unit test mocking only.
+     * 
+     * @param dice
      */
     public void setDice(Dice dice) {
         this.dice = dice;
