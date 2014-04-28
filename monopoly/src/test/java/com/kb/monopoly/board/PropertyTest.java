@@ -17,7 +17,7 @@ import org.junit.Test;
  * @author Kyle
  * 
  */
-public class OwnableTest {
+public class PropertyTest {
 
     private Station kingsCross;
 

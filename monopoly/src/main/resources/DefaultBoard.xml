@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Properties>
+
+  <PropertySet Colour="Brown">
+    <Street BoardIndex="1"  Name="Old Kent Road" Value="60">
+      <RentLevels>
+        <Base>2</Base>
+        <OneHouse>10</OneHouse>
+        <TwoHouse>30</TwoHouse>
+        <ThreeHouse>90</ThreeHouse>
+        <FourHouse>160</FourHouse>
+        <Hotel>250</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="3" Name="Whitechapel Road" Value="60">
+      <RentLevels>
+        <Base>4</Base>
+        <OneHouse>20</OneHouse>
+        <TwoHouse>60</TwoHouse>
+        <ThreeHouse>180</ThreeHouse>
+        <FourHouse>320</FourHouse>
+        <Hotel>450</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="LightBlue">
+    <Street BoardIndex="6" Name="The Angel Islington" Value="100">
+      <RentLevels>
+        <Base>6</Base>
+        <OneHouse>30</OneHouse>
+        <TwoHouse>90</TwoHouse>
+        <ThreeHouse>270</ThreeHouse>
+        <FourHouse>400</FourHouse>
+        <Hotel>550</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="8" Name="Euston Road" Value="100">
+      <RentLevels>
+        <Base>6</Base>
+        <OneHouse>30</OneHouse>
+        <TwoHouse>90</TwoHouse>
+        <ThreeHouse>270</ThreeHouse>
+        <FourHouse>400</FourHouse>
+        <Hotel>550</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="9" Name="Pentonville Road" Value="120">
+      <RentLevels>
+        <Base>8</Base>
+        <OneHouse>40</OneHouse>
+        <TwoHouse>100</TwoHouse>
+        <ThreeHouse>300</ThreeHouse>
+        <FourHouse>450</FourHouse>
+        <Hotel>600</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="Magenta">
+    <Street BoardIndex="11" Name="Pall Mall" Value="140">  
+      <RentLevels>
+        <Base>10</Base>
+        <OneHouse>50</OneHouse>
+        <TwoHouse>150</TwoHouse>
+        <ThreeHouse>450</ThreeHouse>
+        <FourHouse>625</FourHouse>
+        <Hotel>750</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="13" Name="Whitehall" Value="140">
+      <RentLevels>
+        <Base>10</Base>
+        <OneHouse>50</OneHouse>
+        <TwoHouse>150</TwoHouse>
+        <ThreeHouse>450</ThreeHouse>
+        <FourHouse>625</FourHouse>
+        <Hotel>750</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="14" Name="Northumberland Ave" Value="160">
+      <RentLevels>
+        <Base>12</Base>
+        <OneHouse>60</OneHouse>
+        <TwoHouse>180</TwoHouse>
+        <ThreeHouse>500</ThreeHouse>
+        <FourHouse>700</FourHouse>
+        <Hotel>900</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="Orange">
+    <Street BoardIndex="16" Name="Bow Street" Value="180">
+      <RentLevels>
+        <Base>14</Base>
+        <OneHouse>70</OneHouse>
+        <TwoHouse>200</TwoHouse>
+        <ThreeHouse>550</ThreeHouse>
+        <FourHouse>750</FourHouse>
+        <Hotel>950</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="18" Name="Marlborough Street" Value="180">
+      <RentLevels>
+        <Base>14</Base>
+        <OneHouse>70</OneHouse>
+        <TwoHouse>200</TwoHouse>
+        <ThreeHouse>550</ThreeHouse>
+        <FourHouse>750</FourHouse>
+        <Hotel>950</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="19" Name="Vine Street" Value="200">
+      <RentLevels>
+        <Base>16</Base>
+        <OneHouse>80</OneHouse>
+        <TwoHouse>220</TwoHouse>
+        <ThreeHouse>600</ThreeHouse>
+        <FourHouse>800</FourHouse>
+        <Hotel>1000</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="Red">
+    <Street BoardIndex="21" Name="The Strand" Value="220">
+      <RentLevels>
+        <Base>18</Base>
+        <OneHouse>90</OneHouse>
+        <TwoHouse>250</TwoHouse>
+        <ThreeHouse>700</ThreeHouse>
+        <FourHouse>875</FourHouse>
+        <Hotel>1050</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="23" Name="Fleet Street" Value="220">
+      <RentLevels>
+        <Base>18</Base>
+        <OneHouse>90</OneHouse>
+        <TwoHouse>250</TwoHouse>
+        <ThreeHouse>700</ThreeHouse>
+        <FourHouse>875</FourHouse>
+        <Hotel>1050</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="24" Name="Trafalgar Square" Value="240">
+      <RentLevels>
+        <Base>20</Base>
+        <OneHouse>100</OneHouse>
+        <TwoHouse>300</TwoHouse>
+        <ThreeHouse>750</ThreeHouse>
+        <FourHouse>925</FourHouse>
+        <Hotel>1100</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="Yellow">
+    <Street BoardIndex="26" Name="Leicster Square" Value="260">
+      <RentLevels>
+        <Base>22</Base>
+        <OneHouse>110</OneHouse>
+        <TwoHouse>330</TwoHouse>
+        <ThreeHouse>800</ThreeHouse>
+        <FourHouse>975</FourHouse>
+        <Hotel>1150</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="27" Name="Coventry Street" Value="260">
+      <RentLevels>
+        <Base>22</Base>
+        <OneHouse>110</OneHouse>
+        <TwoHouse>330</TwoHouse>
+        <ThreeHouse>800</ThreeHouse>
+        <FourHouse>975</FourHouse>
+        <Hotel>1150</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="29" Name="Piccadilly" Value="280">
+      <RentLevels>
+        <Base>24</Base>
+        <OneHouse>120</OneHouse>
+        <TwoHouse>360</TwoHouse>
+        <ThreeHouse>800</ThreeHouse>
+        <FourHouse>1025</FourHouse>
+        <Hotel>1200</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="Green">
+    <Street BoardIndex="31" Name="Regent Street" Value="300">
+      <RentLevels>
+        <Base>26</Base>
+        <OneHouse>130</OneHouse>
+        <TwoHouse>390</TwoHouse>
+        <ThreeHouse>900</ThreeHouse>
+        <FourHouse>1100</FourHouse>
+        <Hotel>1275</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="32" Name="Oxford Street" Value="300">
+      <RentLevels>
+        <Base>26</Base>
+        <OneHouse>130</OneHouse>
+        <TwoHouse>390</TwoHouse>
+        <ThreeHouse>900</ThreeHouse>
+        <FourHouse>1100</FourHouse>
+        <Hotel>1275</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="34" Name="Bond Street" Value="320">
+      <RentLevels>
+        <Base>28</Base>
+        <OneHouse>150</OneHouse>
+        <TwoHouse>450</TwoHouse>
+        <ThreeHouse>1000</ThreeHouse>
+        <FourHouse>1200</FourHouse>
+        <Hotel>1400</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <PropertySet Colour="DarkBlue">
+    <Street BoardIndex="37" Name="Park Lane" Value="350">
+      <RentLevels>
+        <Base>35</Base>
+        <OneHouse>175</OneHouse>
+        <TwoHouse>500</TwoHouse>
+        <ThreeHouse>1100</ThreeHouse>
+        <FourHouse>1300</FourHouse>
+        <Hotel>1500</Hotel>
+      </RentLevels>
+    </Street>
+    <Street BoardIndex="39" Name="Mayfair" Value="400">
+      <RentLevels>
+        <Base>50</Base>
+        <OneHouse>200</OneHouse>
+        <TwoHouse>600</TwoHouse>
+        <ThreeHouse>1400</ThreeHouse>
+        <FourHouse>1700</FourHouse>
+        <Hotel>2000</Hotel>
+      </RentLevels>
+    </Street>
+  </PropertySet>
+  
+  <Station Name="Kings Cross"/>
+  <Station Name="Marylebone"/>
+  <Station Name="Fenchurch Street"/>
+  <Station Name="Liverpool Street"/>
+  
+  <Utility Name="Electric Company"/>
+  <Utility Name="Water Company"/>
+  
+</Properties>
