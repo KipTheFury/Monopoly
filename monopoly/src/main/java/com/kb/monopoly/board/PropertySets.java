@@ -10,7 +10,16 @@ import java.util.HashMap;
 public class PropertySets {
 
     public enum SetColour {
-        Brown, LightBlue, Magenta, Orange, Red, Yellow, Green, DarkBlue;
+
+        Brown,
+        LightBlue,
+        Magenta,
+        Orange,
+        Red,
+        Yellow,
+        Green,
+        DarkBlue;
+
     }
 
     private static HashMap<SetColour, ArrayList<Street>> sets = new HashMap<SetColour, ArrayList<Street>>();

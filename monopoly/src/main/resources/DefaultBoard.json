@@ -1,0 +1,342 @@
+{
+  "Properties": {
+    "PropertySet": [
+      {
+        "-Colour": "Brown",
+        "Street": [
+          {
+            "-BoardIndex": "1",
+            "-Name": "Old Kent Road",
+            "-Value": "60",
+            "RentLevels": {
+              "Base": "2",
+              "OneHouse": "10",
+              "TwoHouse": "30",
+              "ThreeHouse": "90",
+              "FourHouse": "160",
+              "Hotel": "250"
+            }
+          },
+          {
+            "-BoardIndex": "3",
+            "-Name": "Whitechapel Road",
+            "-Value": "60",
+            "RentLevels": {
+              "Base": "4",
+              "OneHouse": "20",
+              "TwoHouse": "60",
+              "ThreeHouse": "180",
+              "FourHouse": "320",
+              "Hotel": "450"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "LightBlue",
+        "Street": [
+          {
+            "-BoardIndex": "6",
+            "-Name": "The Angel Islington",
+            "-Value": "100",
+            "RentLevels": {
+              "Base": "6",
+              "OneHouse": "30",
+              "TwoHouse": "90",
+              "ThreeHouse": "270",
+              "FourHouse": "400",
+              "Hotel": "550"
+            }
+          },
+          {
+            "-BoardIndex": "8",
+            "-Name": "Euston Road",
+            "-Value": "100",
+            "RentLevels": {
+              "Base": "6",
+              "OneHouse": "30",
+              "TwoHouse": "90",
+              "ThreeHouse": "270",
+              "FourHouse": "400",
+              "Hotel": "550"
+            }
+          },
+          {
+            "-BoardIndex": "9",
+            "-Name": "Pentonville Road",
+            "-Value": "120",
+            "RentLevels": {
+              "Base": "8",
+              "OneHouse": "40",
+              "TwoHouse": "100",
+              "ThreeHouse": "300",
+              "FourHouse": "450",
+              "Hotel": "600"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "Magenta",
+        "Street": [
+          {
+            "-BoardIndex": "11",
+            "-Name": "Pall Mall",
+            "-Value": "140",
+            "RentLevels": {
+              "Base": "10",
+              "OneHouse": "50",
+              "TwoHouse": "150",
+              "ThreeHouse": "450",
+              "FourHouse": "625",
+              "Hotel": "750"
+            }
+          },
+          {
+            "-BoardIndex": "13",
+            "-Name": "Whitehall",
+            "-Value": "140",
+            "RentLevels": {
+              "Base": "10",
+              "OneHouse": "50",
+              "TwoHouse": "150",
+              "ThreeHouse": "450",
+              "FourHouse": "625",
+              "Hotel": "750"
+            }
+          },
+          {
+            "-BoardIndex": "14",
+            "-Name": "Northumberland Ave",
+            "-Value": "160",
+            "RentLevels": {
+              "Base": "12",
+              "OneHouse": "60",
+              "TwoHouse": "180",
+              "ThreeHouse": "500",
+              "FourHouse": "700",
+              "Hotel": "900"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "Orange",
+        "Street": [
+          {
+            "-BoardIndex": "16",
+            "-Name": "Bow Street",
+            "-Value": "180",
+            "RentLevels": {
+              "Base": "14",
+              "OneHouse": "70",
+              "TwoHouse": "200",
+              "ThreeHouse": "550",
+              "FourHouse": "750",
+              "Hotel": "950"
+            }
+          },
+          {
+            "-BoardIndex": "18",
+            "-Name": "Marlborough Street",
+            "-Value": "180",
+            "RentLevels": {
+              "Base": "14",
+              "OneHouse": "70",
+              "TwoHouse": "200",
+              "ThreeHouse": "550",
+              "FourHouse": "750",
+              "Hotel": "950"
+            }
+          },
+          {
+            "-BoardIndex": "19",
+            "-Name": "Vine Street",
+            "-Value": "200",
+            "RentLevels": {
+              "Base": "16",
+              "OneHouse": "80",
+              "TwoHouse": "220",
+              "ThreeHouse": "600",
+              "FourHouse": "800",
+              "Hotel": "1000"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "Red",
+        "Street": [
+          {
+            "-BoardIndex": "21",
+            "-Name": "The Strand",
+            "-Value": "220",
+            "RentLevels": {
+              "Base": "18",
+              "OneHouse": "90",
+              "TwoHouse": "250",
+              "ThreeHouse": "700",
+              "FourHouse": "875",
+              "Hotel": "1050"
+            }
+          },
+          {
+            "-BoardIndex": "23",
+            "-Name": "Fleet Street",
+            "-Value": "220",
+            "RentLevels": {
+              "Base": "18",
+              "OneHouse": "90",
+              "TwoHouse": "250",
+              "ThreeHouse": "700",
+              "FourHouse": "875",
+              "Hotel": "1050"
+            }
+          },
+          {
+            "-BoardIndex": "24",
+            "-Name": "Trafalgar Square",
+            "-Value": "240",
+            "RentLevels": {
+              "Base": "20",
+              "OneHouse": "100",
+              "TwoHouse": "300",
+              "ThreeHouse": "750",
+              "FourHouse": "925",
+              "Hotel": "1100"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "Yellow",
+        "Street": [
+          {
+            "-BoardIndex": "26",
+            "-Name": "Leicster Square",
+            "-Value": "260",
+            "RentLevels": {
+              "Base": "22",
+              "OneHouse": "110",
+              "TwoHouse": "330",
+              "ThreeHouse": "800",
+              "FourHouse": "975",
+              "Hotel": "1150"
+            }
+          },
+          {
+            "-BoardIndex": "27",
+            "-Name": "Coventry Street",
+            "-Value": "260",
+            "RentLevels": {
+              "Base": "22",
+              "OneHouse": "110",
+              "TwoHouse": "330",
+              "ThreeHouse": "800",
+              "FourHouse": "975",
+              "Hotel": "1150"
+            }
+          },
+          {
+            "-BoardIndex": "29",
+            "-Name": "Piccadilly",
+            "-Value": "280",
+            "RentLevels": {
+              "Base": "24",
+              "OneHouse": "120",
+              "TwoHouse": "360",
+              "ThreeHouse": "800",
+              "FourHouse": "1025",
+              "Hotel": "1200"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "Green",
+        "Street": [
+          {
+            "-BoardIndex": "31",
+            "-Name": "Regent Street",
+            "-Value": "300",
+            "RentLevels": {
+              "Base": "26",
+              "OneHouse": "130",
+              "TwoHouse": "390",
+              "ThreeHouse": "900",
+              "FourHouse": "1100",
+              "Hotel": "1275"
+            }
+          },
+          {
+            "-BoardIndex": "32",
+            "-Name": "Oxford Street",
+            "-Value": "300",
+            "RentLevels": {
+              "Base": "26",
+              "OneHouse": "130",
+              "TwoHouse": "390",
+              "ThreeHouse": "900",
+              "FourHouse": "1100",
+              "Hotel": "1275"
+            }
+          },
+          {
+            "-BoardIndex": "34",
+            "-Name": "Bond Street",
+            "-Value": "320",
+            "RentLevels": {
+              "Base": "28",
+              "OneHouse": "150",
+              "TwoHouse": "450",
+              "ThreeHouse": "1000",
+              "FourHouse": "1200",
+              "Hotel": "1400"
+            }
+          }
+        ]
+      },
+      {
+        "-Colour": "DarkBlue",
+        "Street": [
+          {
+            "-BoardIndex": "37",
+            "-Name": "Park Lane",
+            "-Value": "350",
+            "RentLevels": {
+              "Base": "35",
+              "OneHouse": "175",
+              "TwoHouse": "500",
+              "ThreeHouse": "1100",
+              "FourHouse": "1300",
+              "Hotel": "1500"
+            }
+          },
+          {
+            "-BoardIndex": "39",
+            "-Name": "Mayfair",
+            "-Value": "400",
+            "RentLevels": {
+              "Base": "50",
+              "OneHouse": "200",
+              "TwoHouse": "600",
+              "ThreeHouse": "1400",
+              "FourHouse": "1700",
+              "Hotel": "2000"
+            }
+          }
+        ]
+      }
+    ],
+    "Station": [
+      { "-Name": "Kings Cross" },
+      { "-Name": "Marylebone" },
+      { "-Name": "Fenchurch Street" },
+      { "-Name": "Liverpool Street" }
+    ],
+    "Utility": [
+      { "-Name": "Electric Company" },
+      { "-Name": "Water Company" }
+    ]
+  }
+}
