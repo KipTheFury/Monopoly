@@ -32,11 +32,12 @@ public class UtilityTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void testName() throws Exception {
+    public void canCalculateRent() throws Exception {
 
         Player mockPlayer = mock(Player.class);
         ArrayList<Property> mockInventory = new ArrayList<Property>();
         mockInventory.add(electric);
+        mockInventory.add(new Station("Station"));
 
         electric.setOwner(mockPlayer);
 
@@ -53,6 +54,16 @@ public class UtilityTest {
         mockInventory.add(water);
 
         electric.calculateRent(diceRoll);
+    }
+
+    @Test(expected = IllegalAccessException.class)
+    public void cannotCalculateRentWithNoOwner() throws Exception {
+        electric.calculateRent(3);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void cannotCalculateRentWithoutDiceRoll() throws Exception {
+        electric.calculateRent();
     }
 
 }

@@ -25,6 +25,6 @@ public class JSONBoardLoaderTest {
     @Test
     public void canLoadBoard_JSON() throws Exception {
 
-        loader.loadBoard(json);
+        loader.loadProperties(json);
     }
 }

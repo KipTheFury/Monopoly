@@ -13,7 +13,6 @@ package com.kb.monopoly.board;
 public class Station extends Property {
 
     private static final int STATION_VALUE = 200;
-    private static final int STATION_MORTGAGE_VALUE = 100;
 
     /**
      * Constructor.
@@ -21,7 +20,7 @@ public class Station extends Property {
      * @param name
      */
     public Station(String name) {
-        super(name, STATION_VALUE, STATION_MORTGAGE_VALUE);
+        super(name, STATION_VALUE);
     }
 
     /*

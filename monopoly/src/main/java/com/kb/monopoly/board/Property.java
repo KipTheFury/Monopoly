@@ -27,10 +27,10 @@ public abstract class Property extends Space {
      * @param value
      *            - The value of the space
      */
-    public Property(String name, int value, int mortgageValue) {
+    public Property(String name, int value) {
         super(name);
         this.value = value;
-        this.mortgageValue = mortgageValue;
+        this.mortgageValue = value / 2;
     }
 
     /**
@@ -110,6 +110,6 @@ public abstract class Property extends Space {
      */
     @Override
     public String toString() {
-        return super.toString() + " (" + value + ")";
+        return super.toString();
     }
 }

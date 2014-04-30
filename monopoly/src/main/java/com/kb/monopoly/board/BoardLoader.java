@@ -6,12 +6,14 @@
  */
 package com.kb.monopoly.board;
 
+import java.util.Collection;
+
 /**
  * @author Kyle
  * 
  */
 public interface BoardLoader {
 
-    public void loadBoard(String fileLocation);
+    public Collection<Property> loadProperties(String fileLocation) throws Exception;
 
 }

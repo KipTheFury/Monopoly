@@ -31,7 +31,7 @@ public class PropertySets {
      *            the set colour.
      * @return - the streets in that set.
      */
-    public ArrayList<Street> getPropertySet(SetColour colour) {
+    public static ArrayList<Street> getPropertySet(SetColour colour) {
 
         return sets.get(colour);
     }
@@ -44,7 +44,7 @@ public class PropertySets {
      * @param streets
      *            - the streets in that set.
      */
-    public void addPropertySet(SetColour colour, ArrayList<Street> streets) {
+    public static void addPropertySet(SetColour colour, ArrayList<Street> streets) {
         sets.put(colour, streets);
     }
 }

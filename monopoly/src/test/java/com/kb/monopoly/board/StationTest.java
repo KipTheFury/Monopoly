@@ -39,6 +39,7 @@ public class StationTest {
         Player mockPlayer = mock(Player.class);
         ArrayList<Property> mockInventory = new ArrayList<Property>();
         mockInventory.add(kingsCross);
+        mockInventory.add(new Utility("Utility"));
 
         kingsCross.setOwner(mockPlayer);
 
@@ -60,6 +61,11 @@ public class StationTest {
 
         mockInventory.add(kingsCross);
 
+        kingsCross.calculateRent();
+    }
+
+    @Test(expected = IllegalAccessException.class)
+    public void cannotCalculateRentWithNoOwner() throws Exception {
         kingsCross.calculateRent();
     }
 }

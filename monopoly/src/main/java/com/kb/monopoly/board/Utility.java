@@ -13,7 +13,6 @@ package com.kb.monopoly.board;
 public class Utility extends Property {
 
     private static final int UTILITY_VALUE = 150;
-    private static final int UTILITY_MORTGAGE_VALUE = 75;
 
     /**
      * Constructor.
@@ -21,7 +20,7 @@ public class Utility extends Property {
      * @param name
      */
     public Utility(String name) {
-        super(name, UTILITY_VALUE, UTILITY_MORTGAGE_VALUE);
+        super(name, UTILITY_VALUE);
     }
 
     /*

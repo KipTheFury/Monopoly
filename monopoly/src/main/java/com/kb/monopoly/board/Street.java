@@ -3,6 +3,8 @@
  */
 package com.kb.monopoly.board;
 
+import java.util.ArrayList;
+
 /**
  * @author kbennett
  * 
@@ -35,9 +37,9 @@ public class Street extends Property {
      * @param rent
      *            - the different levels of rent for this street.
      */
-    public Street(String name, int value, int mortgageValue, PropertySets.SetColour setColour, int buildingCost,
+    public Street(String name, int value, PropertySets.SetColour setColour, int buildingCost,
             int[] rent) {
-        super(name, value, mortgageValue);
+        super(name, value);
 
         this.setColour = setColour;
         this.buildingCost = buildingCost;
@@ -90,10 +92,36 @@ public class Street extends Property {
     public int calculateRent() throws IllegalAccessException {
 
         if (ownedBy != null) {
-            return rentLevels[buildingCount];
+
+            int rent = 0;
+
+            if (undevelopedPropertySet()) {
+                rent = rentLevels[0] * 2;
+            } else {
+
+                rent = rentLevels[buildingCount];
+            }
+            return rent;
         } else {
             throw new IllegalAccessException("No-one owns " + name);
         }
+    }
+
+    private boolean undevelopedPropertySet() {
+
+        ArrayList<Street> set = PropertySets.getPropertySet(setColour);
+
+        if (ownedBy.getInventory().containsAll(set)) {
+            for (Street s : set) {
+                if (s.getBuildingCount() > 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**

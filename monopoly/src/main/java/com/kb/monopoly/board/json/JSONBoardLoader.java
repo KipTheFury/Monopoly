@@ -3,19 +3,21 @@
  */
 package com.kb.monopoly.board.json;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import com.kb.monopoly.board.BoardLoader;
+import com.kb.monopoly.board.Property;
+import com.kb.monopoly.board.PropertySets;
 import com.kb.monopoly.board.PropertySets.SetColour;
+import com.kb.monopoly.board.Street;
 
 /**
  * @author kbennett
@@ -36,31 +38,25 @@ public class JSONBoardLoader implements BoardLoader {
      * @see com.kb.monopoly.board.BoardLoader#loadBoard(java.lang.String)
      */
     @Override
-    public void loadBoard(String fileLocation) {
+    public Collection<Property> loadProperties(String fileLocation) throws Exception {
+
+        ArrayList<Property> properties = new ArrayList<Property>();
 
         log.info("Loading board from [" + fileLocation + "]");
 
-        try {
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(new FileReader(fileLocation));
 
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(new FileReader(fileLocation));
+        JSONArray propertySets = (JSONArray) json.get(PROPERTY_SET);
+        loadPropertySets(propertySets);
 
-            JSONArray propertySets = (JSONArray) json.get(PROPERTY_SET);
-            loadPropertySets(propertySets);
+        JSONArray stations = (JSONArray) json.get(STATION);
+        loadStations(stations);
 
-            JSONArray stations = (JSONArray) json.get(STATION);
-            loadStations(stations);
+        JSONArray utilities = (JSONArray) json.get(UTILITY);
+        loadUtilities(utilities);
 
-            JSONArray utilities = (JSONArray) json.get(UTILITY);
-            loadUtilities(utilities);
-
-        } catch (FileNotFoundException e) {
-            log.error("File not found [" + fileLocation + "]", e);
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        } catch (ParseException e) {
-            log.error("Board Json file is invalid", e);
-        }
+        return properties;
     }
 
     @SuppressWarnings("unchecked")
@@ -88,11 +84,16 @@ public class JSONBoardLoader implements BoardLoader {
 
         Iterator<JSONObject> iterator = streets.iterator();
 
+        ArrayList<Street> streetsList = new ArrayList<Street>();
+
         while (iterator.hasNext()) {
 
             JSONObject street = iterator.next();
+
             System.out.println(street);
         }
+
+        PropertySets.addPropertySet(colour, streetsList);
     }
 
     @SuppressWarnings("unchecked")
