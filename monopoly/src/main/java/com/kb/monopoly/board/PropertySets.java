@@ -7,7 +7,7 @@ import java.util.HashMap;
  * @author kbennett
  * 
  */
-public class PropertySets {
+public final class PropertySets {
 
     public enum SetColour {
 
