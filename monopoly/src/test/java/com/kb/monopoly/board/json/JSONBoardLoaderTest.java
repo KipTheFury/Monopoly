@@ -3,8 +3,18 @@
  */
 package com.kb.monopoly.board.json;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.HashMap;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import com.kb.monopoly.board.PropertySets;
+import com.kb.monopoly.board.PropertySets.SetColour;
+import com.kb.monopoly.board.space.Property;
 
 /**
  * @author kbennett
@@ -25,6 +35,13 @@ public class JSONBoardLoaderTest {
     @Test
     public void canLoadBoard_JSON() throws Exception {
 
-        loader.loadProperties(json);
+        final HashMap<Integer, Property> properties = loader.loadProperties(json);
+
+        assertTrue(properties.size() == 28);
+
+        for (final SetColour colour : SetColour.values()) {
+            assertNotNull(PropertySets.getPropertySet(colour));
+            assertFalse(PropertySets.getPropertySet(colour).isEmpty());
+        }
     }
 }

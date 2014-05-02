@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
@@ -30,6 +30,7 @@ import com.kb.monopoly.board.space.Utility;
  */
 public class JSONBoardLoader implements BoardLoader {
 
+    private static final String BUILDING_COST = "-BuildingCost";
     private static final String VALUE = "-Value";
     private static final String BOARD_INDEX = "-BoardIndex";
     private static final String RENT_LEVELS = "RentLevels";
@@ -42,15 +43,17 @@ public class JSONBoardLoader implements BoardLoader {
 
     private static final Logger LOG = Logger.getLogger(JSONBoardLoader.class);
 
+    private HashMap<Integer, Property> properties;
+
     /*
      * (non-Javadoc)
      * 
      * @see com.kb.monopoly.board.BoardLoader#loadBoard(java.lang.String)
      */
     @Override
-    public Collection<Property> loadProperties(final String fileLocation) {
+    public HashMap<Integer, Property> loadProperties(final String fileLocation) {
 
-        final ArrayList<Property> properties = new ArrayList<Property>();
+        properties = new HashMap<Integer, Property>();
 
         LOG.info("Loading board from [" + fileLocation + "]");
 
@@ -116,9 +119,13 @@ public class JSONBoardLoader implements BoardLoader {
 
             final int boardIndex = Integer.valueOf((String) obj.get(BOARD_INDEX));
 
-            // TODO - add building cost to JSON
             final Street street =
-                    new Street((String) obj.get(NAME), Integer.valueOf((String) obj.get(VALUE)), colour, 0, rent);
+                    new Street((String) obj.get(NAME), Integer.valueOf((String) obj.get(VALUE)), colour,
+                            Integer.valueOf((String) obj.get(BUILDING_COST)), rent);
+
+            streetsList.add(street);
+
+            properties.put(boardIndex, street);
 
             LOG.info("Created [" + boardIndex + "\t" + street + "]");
         }
@@ -148,8 +155,12 @@ public class JSONBoardLoader implements BoardLoader {
         while (iterator.hasNext()) {
             final JSONObject obj = iterator.next();
 
+            final int boardIndex = Integer.valueOf((String) obj.get(BOARD_INDEX));
+
             final Utility util = new Utility((String) obj.get(NAME));
             LOG.info("Created [" + util + "]");
+
+            properties.put(boardIndex, util);
         }
     }
 
@@ -163,8 +174,12 @@ public class JSONBoardLoader implements BoardLoader {
         while (iterator.hasNext()) {
             final JSONObject obj = iterator.next();
 
+            final int boardIndex = Integer.valueOf((String) obj.get(BOARD_INDEX));
+
             final Station station = new Station((String) obj.get(NAME));
             LOG.info("Created [" + station + "]");
+
+            properties.put(boardIndex, station);
         }
     }
 }

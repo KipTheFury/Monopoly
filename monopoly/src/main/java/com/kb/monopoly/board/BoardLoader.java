@@ -6,7 +6,7 @@
  */
 package com.kb.monopoly.board;
 
-import java.util.Collection;
+import java.util.HashMap;
 
 import com.kb.monopoly.board.space.Property;
 
@@ -16,6 +16,6 @@ import com.kb.monopoly.board.space.Property;
  */
 public interface BoardLoader {
 
-    Collection<Property> loadProperties(String fileLocation);
+    HashMap<Integer, Property> loadProperties(String fileLocation);
 
 }

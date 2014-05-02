@@ -1,5 +1,4 @@
 {
-  "Properties": {
     "PropertySet": [
       {
         "-Colour": "Brown",
@@ -8,21 +7,23 @@
             "-BoardIndex": "1",
             "-Name": "Old Kent Road",
             "-Value": "60",
+            "-BuildingCost": "50",
             "RentLevels": {
-              "Base": 2,
-              "OneHouse": 10,
-              "TwoHouse": 30,
-              "ThreeHouse": 90,
-              "FourHouse": 160,
-              "Hotel": 250
+              "Base": "2",
+              "OneHouse": "10",
+              "TwoHouse": "30",
+              "ThreeHouse": "90",
+              "FourHouse": "160",
+              "Hotel": "250"
             }
           },
           {
             "-BoardIndex": "3",
             "-Name": "Whitechapel Road",
             "-Value": "60",
+            "-BuildingCost": "50",
             "RentLevels": {
-              "Base": 4,
+              "Base": "4",
               "OneHouse": "20",
               "TwoHouse": "60",
               "ThreeHouse": "180",
@@ -39,6 +40,7 @@
             "-BoardIndex": "6",
             "-Name": "The Angel Islington",
             "-Value": "100",
+            "-BuildingCost": "50",
             "RentLevels": {
               "Base": "6",
               "OneHouse": "30",
@@ -52,6 +54,7 @@
             "-BoardIndex": "8",
             "-Name": "Euston Road",
             "-Value": "100",
+            "-BuildingCost": "50",
             "RentLevels": {
               "Base": "6",
               "OneHouse": "30",
@@ -65,6 +68,7 @@
             "-BoardIndex": "9",
             "-Name": "Pentonville Road",
             "-Value": "120",
+            "-BuildingCost": "50",
             "RentLevels": {
               "Base": "8",
               "OneHouse": "40",
@@ -83,6 +87,7 @@
             "-BoardIndex": "11",
             "-Name": "Pall Mall",
             "-Value": "140",
+            "-BuildingCost": "100",
             "RentLevels": {
               "Base": "10",
               "OneHouse": "50",
@@ -96,6 +101,7 @@
             "-BoardIndex": "13",
             "-Name": "Whitehall",
             "-Value": "140",
+            "-BuildingCost": "100",
             "RentLevels": {
               "Base": "10",
               "OneHouse": "50",
@@ -109,6 +115,7 @@
             "-BoardIndex": "14",
             "-Name": "Northumberland Ave",
             "-Value": "160",
+            "-BuildingCost": "100",
             "RentLevels": {
               "Base": "12",
               "OneHouse": "60",
@@ -127,6 +134,7 @@
             "-BoardIndex": "16",
             "-Name": "Bow Street",
             "-Value": "180",
+            "-BuildingCost": "100",
             "RentLevels": {
               "Base": "14",
               "OneHouse": "70",
@@ -140,6 +148,7 @@
             "-BoardIndex": "18",
             "-Name": "Marlborough Street",
             "-Value": "180",
+            "-BuildingCost": "100",
             "RentLevels": {
               "Base": "14",
               "OneHouse": "70",
@@ -153,6 +162,7 @@
             "-BoardIndex": "19",
             "-Name": "Vine Street",
             "-Value": "200",
+            "-BuildingCost": "100",
             "RentLevels": {
               "Base": "16",
               "OneHouse": "80",
@@ -171,6 +181,7 @@
             "-BoardIndex": "21",
             "-Name": "The Strand",
             "-Value": "220",
+            "-BuildingCost": "150",
             "RentLevels": {
               "Base": "18",
               "OneHouse": "90",
@@ -184,6 +195,7 @@
             "-BoardIndex": "23",
             "-Name": "Fleet Street",
             "-Value": "220",
+            "-BuildingCost": "150",
             "RentLevels": {
               "Base": "18",
               "OneHouse": "90",
@@ -197,6 +209,7 @@
             "-BoardIndex": "24",
             "-Name": "Trafalgar Square",
             "-Value": "240",
+            "-BuildingCost": "150",
             "RentLevels": {
               "Base": "20",
               "OneHouse": "100",
@@ -215,6 +228,7 @@
             "-BoardIndex": "26",
             "-Name": "Leicster Square",
             "-Value": "260",
+            "-BuildingCost": "150",
             "RentLevels": {
               "Base": "22",
               "OneHouse": "110",
@@ -228,6 +242,7 @@
             "-BoardIndex": "27",
             "-Name": "Coventry Street",
             "-Value": "260",
+            "-BuildingCost": "150",
             "RentLevels": {
               "Base": "22",
               "OneHouse": "110",
@@ -241,6 +256,7 @@
             "-BoardIndex": "29",
             "-Name": "Piccadilly",
             "-Value": "280",
+            "-BuildingCost": "150",
             "RentLevels": {
               "Base": "24",
               "OneHouse": "120",
@@ -259,6 +275,7 @@
             "-BoardIndex": "31",
             "-Name": "Regent Street",
             "-Value": "300",
+            "-BuildingCost": "200",
             "RentLevels": {
               "Base": "26",
               "OneHouse": "130",
@@ -272,6 +289,7 @@
             "-BoardIndex": "32",
             "-Name": "Oxford Street",
             "-Value": "300",
+            "-BuildingCost": "200",
             "RentLevels": {
               "Base": "26",
               "OneHouse": "130",
@@ -285,6 +303,7 @@
             "-BoardIndex": "34",
             "-Name": "Bond Street",
             "-Value": "320",
+            "-BuildingCost": "200",
             "RentLevels": {
               "Base": "28",
               "OneHouse": "150",
@@ -303,6 +322,7 @@
             "-BoardIndex": "37",
             "-Name": "Park Lane",
             "-Value": "350",
+            "-BuildingCost": "200",
             "RentLevels": {
               "Base": "35",
               "OneHouse": "175",
@@ -316,6 +336,7 @@
             "-BoardIndex": "39",
             "-Name": "Mayfair",
             "-Value": "400",
+            "-BuildingCost": "200",
             "RentLevels": {
               "Base": "50",
               "OneHouse": "200",
@@ -329,14 +350,31 @@
       }
     ],
     "Station": [
-      { "-Name": "Kings Cross" },
-      { "-Name": "Marylebone" },
-      { "-Name": "Fenchurch Street" },
-      { "-Name": "Liverpool Street" }
+      { 
+      	"-Name": "Kings Cross",
+        "-BoardIndex": "5" 
+      },
+      { 
+      	"-Name": "Marylebone"
+      	"-BoardIndex": "15" 
+      },
+      { 
+      	"-Name": "Fenchurch Street"
+      	"-BoardIndex": "25" 
+      },
+      { 
+      	"-Name": "Liverpool Street"
+      	"-BoardIndex": "35"
+      }
     ],
     "Utility": [
-      { "-Name": "Electric Company" },
-      { "-Name": "Water Company" }
+      { 
+      	"-Name": "Electric Company",
+      	"-BoardIndex": "12" 
+      },
+      { 
+      	"-Name": "Water Company",
+      	"-BoardIndex": "28"
+      }
     ]
-  }
 }
