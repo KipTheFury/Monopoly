@@ -14,6 +14,6 @@ import java.util.Collection;
  */
 public interface BoardLoader {
 
-    public Collection<Property> loadProperties(String fileLocation) throws Exception;
+    Collection<Property> loadProperties(String fileLocation);
 
 }

@@ -98,7 +98,7 @@ public class GameTest {
     @Test
     public void canRollForFirstTurn() throws Exception {
 
-        Dice mockDice = mock(Dice.class);
+        DiceRoller mockDice = mock(DiceRoller.class);
         g.setDice(mockDice);
 
         g.addPlayer(bob);
@@ -116,7 +116,7 @@ public class GameTest {
     @Test
     public void turnNumberIncrementsAfterAllPlayersHaveEndedTurns() throws Exception {
 
-        Dice mockDice = mock(Dice.class);
+        DiceRoller mockDice = mock(DiceRoller.class);
         g.setDice(mockDice);
 
         g.addPlayer(bob);

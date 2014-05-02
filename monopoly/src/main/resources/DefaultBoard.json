@@ -9,12 +9,12 @@
             "-Name": "Old Kent Road",
             "-Value": "60",
             "RentLevels": {
-              "Base": "2",
-              "OneHouse": "10",
-              "TwoHouse": "30",
-              "ThreeHouse": "90",
-              "FourHouse": "160",
-              "Hotel": "250"
+              "Base": 2,
+              "OneHouse": 10,
+              "TwoHouse": 30,
+              "ThreeHouse": 90,
+              "FourHouse": 160,
+              "Hotel": 250
             }
           },
           {
@@ -22,7 +22,7 @@
             "-Name": "Whitechapel Road",
             "-Value": "60",
             "RentLevels": {
-              "Base": "4",
+              "Base": 4,
               "OneHouse": "20",
               "TwoHouse": "60",
               "ThreeHouse": "180",

@@ -14,9 +14,9 @@ import org.apache.log4j.Logger;
  * @author Kyle
  * 
  */
-public class Dice {
+public class DiceRoller {
 
-    private static final Logger log = Logger.getLogger(Dice.class);
+    private static final Logger LOG = Logger.getLogger(DiceRoller.class);
 
     private final Random dice = new Random(System.nanoTime());
 
@@ -29,7 +29,7 @@ public class Dice {
 
         int roll = dice.nextInt(5) + 1;
 
-        log.info("Roll... [" + roll + "]");
+        LOG.info("Roll... [" + roll + "]");
 
         return roll;
     }

@@ -17,11 +17,11 @@ import org.junit.Test;
  */
 public class DiceTest {
 
-    private Dice d;
+    private DiceRoller d;
 
     @Before
     public void setUp() throws Exception {
-        d = new Dice();
+        d = new DiceRoller();
     }
 
     @Test

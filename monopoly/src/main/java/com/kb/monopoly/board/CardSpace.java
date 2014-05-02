@@ -9,6 +9,12 @@ package com.kb.monopoly.board;
  */
 public class CardSpace extends Space {
 
+    /**
+     * The differnt types of card that can be drawn.
+     * 
+     * @author kbennett
+     * 
+     */
     public enum CardType {
         Chance, CommunityChest;
     }
@@ -18,7 +24,7 @@ public class CardSpace extends Space {
     /**
      * @param name
      */
-    public CardSpace(String name, CardType cardType) {
+    public CardSpace(final String name, final CardType cardType) {
         super(name);
         this.cardType = cardType;
     }

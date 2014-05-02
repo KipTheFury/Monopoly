@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class Board {
 
-    private static final Logger log = Logger.getLogger(Board.class);
+    private static final Logger LOG = Logger.getLogger(Board.class);
 
     public static final int GO = 0;
     public static final int JAIL = 10;
@@ -49,7 +49,7 @@ public class Board {
      */
     private void loadCards() {
 
-        log.info("Loading Cards...");
+        LOG.info("Loading Cards...");
 
         for (int j = 0; j < 16; j++) {
             chanceCards.add("ChanceCard " + j);
@@ -62,9 +62,9 @@ public class Board {
      */
     private void loadSpaces() {
 
-        log.info("Loading Spaces...");
+        LOG.info("Loading Spaces...");
 
-        Space[] spacesArray = new Space[40];
+        final Space[] spacesArray = new Space[40];
 
         spacesArray[GO] = new Space("Go");
         spacesArray[JAIL] = new Space("Jail");
@@ -88,7 +88,7 @@ public class Board {
      *            - the index of the space on the board (0-39)
      * @return - The space at the given index.
      */
-    public Space getSpace(int index) {
+    public Space getSpace(final int index) {
 
         return spaces.get(index);
     }

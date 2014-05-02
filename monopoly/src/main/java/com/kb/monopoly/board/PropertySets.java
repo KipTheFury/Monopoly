@@ -9,6 +9,16 @@ import java.util.HashMap;
  */
 public final class PropertySets {
 
+    private PropertySets() {
+
+    }
+
+    /**
+     * The different set colours.
+     * 
+     * @author kbennett
+     * 
+     */
     public enum SetColour {
 
         Brown,
@@ -31,7 +41,7 @@ public final class PropertySets {
      *            the set colour.
      * @return - the streets in that set.
      */
-    public static ArrayList<Street> getPropertySet(SetColour colour) {
+    public static ArrayList<Street> getPropertySet(final SetColour colour) {
 
         return sets.get(colour);
     }
@@ -44,7 +54,7 @@ public final class PropertySets {
      * @param streets
      *            - the streets in that set.
      */
-    public static void addPropertySet(SetColour colour, ArrayList<Street> streets) {
+    public static void addPropertySet(final SetColour colour, final ArrayList<Street> streets) {
         sets.put(colour, streets);
     }
 }

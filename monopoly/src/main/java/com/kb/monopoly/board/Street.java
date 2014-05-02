@@ -15,7 +15,7 @@ public class Street extends Property {
 
     private final PropertySets.SetColour setColour;
 
-    private int buildingCount = 0;
+    private int buildingCount;
 
     private final int buildingCost;
 
@@ -37,8 +37,8 @@ public class Street extends Property {
      * @param rent
      *            - the different levels of rent for this street.
      */
-    public Street(String name, int value, PropertySets.SetColour setColour, int buildingCost,
-            int[] rent) {
+    public Street(final String name, final int value, final PropertySets.SetColour setColour, final int buildingCost,
+            final int[] rent) {
         super(name, value);
 
         this.setColour = setColour;
@@ -46,11 +46,10 @@ public class Street extends Property {
 
         if (rent.length == 6) {
 
-            this.rentLevels = rent;
+            rentLevels = rent;
 
-        } else {
+        } else
             throw new IllegalArgumentException("Invalid rent levels - must have 6 rent levels");
-        }
     }
 
     /**
@@ -60,9 +59,8 @@ public class Street extends Property {
 
         if (buildingCount < MAX_HOUSES) {
             buildingCount++;
-        } else {
+        } else
             throw new IllegalStateException("Can't have more than 4 Houses per Street");
-        }
     }
 
     /**
@@ -75,12 +73,10 @@ public class Street extends Property {
 
                 buildingCount++;
 
-            } else {
+            } else
                 throw new IllegalStateException("Must have 4 Houses before building a Hotel");
-            }
-        } else {
+        } else
             throw new IllegalStateException("There is already a Hotel on this Street");
-        }
     }
 
     /*
@@ -102,20 +98,18 @@ public class Street extends Property {
                 rent = rentLevels[buildingCount];
             }
             return rent;
-        } else {
+        } else
             throw new IllegalAccessException("No-one owns " + name);
-        }
     }
 
     private boolean undevelopedPropertySet() {
 
-        ArrayList<Street> set = PropertySets.getPropertySet(setColour);
+        final ArrayList<Street> set = PropertySets.getPropertySet(setColour);
 
         if (ownedBy.getInventory().containsAll(set)) {
-            for (Street s : set) {
-                if (s.getBuildingCount() > 0) {
+            for (final Street s : set) {
+                if (s.getBuildingCount() > 0)
                     return false;
-                }
             }
 
             return true;
@@ -125,7 +119,7 @@ public class Street extends Property {
     }
 
     /**
-     * Get the number of buildings added to this street
+     * Get the number of buildings added to this street.
      * 
      * 0-4 houses 5 Hotel
      * 
