@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.kb.monopoly.board.PropertySets;
 import com.kb.monopoly.board.PropertySets.SetColour;
+import com.kb.monopoly.board.space.Street;
 import com.kb.monopoly.player.Player;
 
 /**

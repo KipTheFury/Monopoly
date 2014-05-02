@@ -1,9 +1,12 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 import java.util.ArrayList;
+
+import com.kb.monopoly.board.PropertySets;
+import com.kb.monopoly.board.PropertySets.SetColour;
 
 /**
  * @author kbennett

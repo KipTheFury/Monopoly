@@ -4,7 +4,7 @@
  * Created - 25 Apr 2014
  * Last Updated - 25 Apr 2014
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.kb.monopoly.board.space.Property;
+import com.kb.monopoly.board.space.Station;
+import com.kb.monopoly.board.space.Utility;
 import com.kb.monopoly.player.Player;
 
 /**

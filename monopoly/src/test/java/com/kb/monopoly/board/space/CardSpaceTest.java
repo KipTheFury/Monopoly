@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.CardSpace.CardType;
+import com.kb.monopoly.board.space.CardSpace.CardType;
 
 /**
  * @author kbennett
@@ -27,6 +27,9 @@ public class CardSpaceTest {
 
     @Test
     public void canGetCardType() throws Exception {
+
+        final CardType c = CardType.valueOf("Chance");
+
         assertEquals(CardType.Chance, chance.getCardType());
         assertEquals(CardType.CommunityChest, communityChest.getCardType());
     }

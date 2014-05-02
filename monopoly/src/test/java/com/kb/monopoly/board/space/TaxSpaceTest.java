@@ -1,12 +1,14 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.kb.monopoly.board.space.TaxSpace;
 
 /**
  * @author kbennett

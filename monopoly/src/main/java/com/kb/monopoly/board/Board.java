@@ -10,6 +10,8 @@ import java.util.Collection;
 import org.apache.commons.collections4.list.FixedSizeList;
 import org.apache.log4j.Logger;
 
+import com.kb.monopoly.board.space.Space;
+
 /**
  * The game board.
  * 

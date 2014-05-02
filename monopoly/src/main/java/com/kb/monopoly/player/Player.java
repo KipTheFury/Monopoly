@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.kb.monopoly.board.Board;
-import com.kb.monopoly.board.Property;
+import com.kb.monopoly.board.space.Property;
 
 /**
  * A player.

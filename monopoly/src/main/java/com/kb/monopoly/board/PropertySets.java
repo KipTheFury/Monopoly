@@ -3,6 +3,8 @@ package com.kb.monopoly.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kb.monopoly.board.space.Street;
+
 /**
  * @author kbennett
  * 

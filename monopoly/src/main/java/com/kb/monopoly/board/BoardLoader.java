@@ -8,6 +8,8 @@ package com.kb.monopoly.board;
 
 import java.util.Collection;
 
+import com.kb.monopoly.board.space.Property;
+
 /**
  * @author Kyle
  * 

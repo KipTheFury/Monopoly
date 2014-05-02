@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 /**
  * @author kbennett
@@ -10,7 +10,7 @@ package com.kb.monopoly.board;
 public class CardSpace extends Space {
 
     /**
-     * The differnt types of card that can be drawn.
+     * The different types of card that can be drawn.
      * 
      * @author kbennett
      * 

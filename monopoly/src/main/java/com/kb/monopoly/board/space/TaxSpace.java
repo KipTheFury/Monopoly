@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 /**
  * @author kbennett
