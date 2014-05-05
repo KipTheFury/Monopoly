@@ -1,56 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/monopoly" xmlns:tns="http://www.example.org/monopoly" elementFormDefault="qualified">
-
-
-	<element name="Properties" type="tns:Properties"></element>
-
-	<complexType name="Properties">
-		<sequence>
-			<element name="PropertySet" type="tns:PropertySet"
-				maxOccurs="8" minOccurs="8">
-			</element>
-			<element name="Station" type="tns:Station" maxOccurs="4"
-				minOccurs="4">
-			</element>
-			<element name="Utility" type="tns:Utility" maxOccurs="2"
-				minOccurs="2">
-			</element>
-		</sequence>
-	</complexType>
-
-    <complexType name="PropertySet">
-    	<sequence>
-    		<element name="Street" type="tns:Street" maxOccurs="3" minOccurs="2"></element>
-    	</sequence>
-    	<attribute name="Colour" type="string"></attribute>
-    </complexType>
-
-    <complexType name="Street">
-    	<sequence>
-    		<element name="RentLevels" type="tns:RentLevels"></element>
-    	</sequence>
-    	<attribute name="Name" type="string"></attribute>
-    	<attribute name="BoardIndex" type="int"></attribute>
-    	<attribute name="Value" type="int"></attribute>
-    </complexType>
-    
-    <complexType name="RentLevels">
-    	<sequence>
-    		<element name="Base" type="int" maxOccurs="1" minOccurs="1"></element>
-    		<element name="OneHouse" type="int" maxOccurs="1" minOccurs="1"></element>
-    		<element name="TwoHouse" type="int" maxOccurs="1" minOccurs="1"></element>
-    		<element name="ThreeHouse" type="int" maxOccurs="1" minOccurs="1"></element>
-    		<element name="FourHouse" type="int" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Hotel" type="int" maxOccurs="1" minOccurs="1"></element>
-    	</sequence>
-    </complexType>
-
-    <complexType name="Station">
-    	<attribute name="Name" type="string"></attribute>
-    </complexType>
-    
-    <complexType name="Utility">
-    	<attribute name="Name" type="string"></attribute>
-    </complexType>
-    
-</schema>
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Properties" type="PropertiesType" />
+  <xsd:complexType name="PropertiesType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="8" minOccurs="8" name="PropertySet" type="PropertySetType" />
+      <xsd:element maxOccurs="4" minOccurs="4" name="Station" type="StationType" />
+      <xsd:element maxOccurs="2" minOccurs="2" name="Utility" type="UtilityType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UtilityType">
+    <xsd:attribute name="Name" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="StationType">
+    <xsd:attribute name="Name" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="PropertySetType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="3" minOccurs="2" name="Street" type="StreetType" />
+    </xsd:sequence>
+    <xsd:attribute name="Colour" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="StreetType">
+    <xsd:sequence>
+      <xsd:element name="RentLevels" type="RentLevelsType" />
+    </xsd:sequence>
+    <xsd:attribute name="BoardIndex" type="xsd:int" />
+    <xsd:attribute name="Name" type="xsd:string" />
+    <xsd:attribute name="Value" type="xsd:int" />
+  </xsd:complexType>
+  <xsd:complexType name="RentLevelsType">
+    <xsd:sequence>
+      <xsd:element name="Base" type="xsd:int" />
+      <xsd:element name="OneHouse" type="xsd:int" />
+      <xsd:element name="TwoHouse" type="xsd:int" />
+      <xsd:element name="ThreeHouse" type="xsd:int" />
+      <xsd:element name="FourHouse" type="xsd:int" />
+      <xsd:element name="Hotel" type="xsd:int" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

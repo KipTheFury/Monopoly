@@ -23,39 +23,6 @@
     </Street>
   </PropertySet>
   
-  <PropertySet Colour="LightBlue">
-    <Street BoardIndex="6" Name="The Angel Islington" Value="100">
-      <RentLevels>
-        <Base>6</Base>
-        <OneHouse>30</OneHouse>
-        <TwoHouse>90</TwoHouse>
-        <ThreeHouse>270</ThreeHouse>
-        <FourHouse>400</FourHouse>
-        <Hotel>550</Hotel>
-      </RentLevels>
-    </Street>
-    <Street BoardIndex="8" Name="Euston Road" Value="100">
-      <RentLevels>
-        <Base>6</Base>
-        <OneHouse>30</OneHouse>
-        <TwoHouse>90</TwoHouse>
-        <ThreeHouse>270</ThreeHouse>
-        <FourHouse>400</FourHouse>
-        <Hotel>550</Hotel>
-      </RentLevels>
-    </Street>
-    <Street BoardIndex="9" Name="Pentonville Road" Value="120">
-      <RentLevels>
-        <Base>8</Base>
-        <OneHouse>40</OneHouse>
-        <TwoHouse>100</TwoHouse>
-        <ThreeHouse>300</ThreeHouse>
-        <FourHouse>450</FourHouse>
-        <Hotel>600</Hotel>
-      </RentLevels>
-    </Street>
-  </PropertySet>
-  
   <PropertySet Colour="Magenta">
     <Street BoardIndex="11" Name="Pall Mall" Value="140">  
       <RentLevels>
@@ -100,16 +67,7 @@
         <Hotel>950</Hotel>
       </RentLevels>
     </Street>
-    <Street BoardIndex="18" Name="Marlborough Street" Value="180">
-      <RentLevels>
-        <Base>14</Base>
-        <OneHouse>70</OneHouse>
-        <TwoHouse>200</TwoHouse>
-        <ThreeHouse>550</ThreeHouse>
-        <FourHouse>750</FourHouse>
-        <Hotel>950</Hotel>
-      </RentLevels>
-    </Street>
+
     <Street BoardIndex="19" Name="Vine Street" Value="200">
       <RentLevels>
         <Base>16</Base>
