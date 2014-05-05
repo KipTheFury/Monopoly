@@ -3,14 +3,35 @@ package com.kb.monopoly.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kb.monopoly.board.space.Street;
+
 /**
  * @author kbennett
  * 
  */
-public class PropertySets {
+public final class PropertySets {
 
+    private PropertySets() {
+
+    }
+
+    /**
+     * The different set colours.
+     * 
+     * @author kbennett
+     * 
+     */
     public enum SetColour {
-        Brown, LightBlue, Magenta, Orange, Red, Yellow, Green, DarkBlue;
+
+        Brown,
+        LightBlue,
+        Magenta,
+        Orange,
+        Red,
+        Yellow,
+        Green,
+        DarkBlue;
+
     }
 
     private static HashMap<SetColour, ArrayList<Street>> sets = new HashMap<SetColour, ArrayList<Street>>();
@@ -22,7 +43,7 @@ public class PropertySets {
      *            the set colour.
      * @return - the streets in that set.
      */
-    public ArrayList<Street> getPropertySet(SetColour colour) {
+    public static ArrayList<Street> getPropertySet(final SetColour colour) {
 
         return sets.get(colour);
     }
@@ -35,7 +56,7 @@ public class PropertySets {
      * @param streets
      *            - the streets in that set.
      */
-    public void addPropertySet(SetColour colour, ArrayList<Street> streets) {
+    public static void addPropertySet(final SetColour colour, final ArrayList<Street> streets) {
         sets.put(colour, streets);
     }
 }

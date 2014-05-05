@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Properties>
+
   <PropertySet Colour="Brown">
     <Street BoardIndex="1"  Name="Old Kent Road" Value="60">
       <RentLevels>
@@ -249,7 +251,7 @@
   <Station Name="Fenchurch Street"/>
   <Station Name="Liverpool Street"/>
   
-  <Utility Name="Electric Company"></Utility>
+  <Utility Name="Electric Company"/>
   <Utility Name="Water Company"/>
   
 </Properties>

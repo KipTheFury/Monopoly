@@ -4,7 +4,7 @@
  * Created - 22 Apr 2014
  * Last Updated - 22 Apr 2014
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 /**
  * @author Kyle

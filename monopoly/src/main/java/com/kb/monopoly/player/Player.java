@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.kb.monopoly.board.Board;
-import com.kb.monopoly.board.Property;
+import com.kb.monopoly.board.space.Property;
 
 /**
  * A player.
@@ -18,7 +18,7 @@ import com.kb.monopoly.board.Property;
  */
 public class Player {
 
-    private static final Logger log = Logger.getLogger(Player.class);
+    private static final Logger LOG = Logger.getLogger(Player.class);
 
     private final String name;
     private int currentBalance;
@@ -27,15 +27,15 @@ public class Player {
     private final ArrayList<Property> inventory = new ArrayList<Property>();
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param name
      *            - the player's name.
      */
-    public Player(String name) {
+    public Player(final String name) {
         this.name = name;
-        this.currentBalance = 1500;
-        this.currentSpace = 0;
+        currentBalance = 1500;
+        currentSpace = 0;
     }
 
     /**
@@ -83,10 +83,10 @@ public class Player {
      * @param roll
      *            - the number of spaces to move
      */
-    public void move(int roll) {
+    public void move(final int roll) {
 
         if (roll < 2 || roll > 12) {
-            log.error("Invalid Roll");
+            LOG.error("Invalid Roll");
             throw new IllegalArgumentException("Invalid Roll");
         }
 
@@ -94,7 +94,7 @@ public class Player {
             currentSpace += roll;
         } else {
 
-            log.info("[" + name + "] passed Go! Collect 200");
+            LOG.info("[" + name + "] passed Go! Collect 200");
 
             currentSpace = (currentSpace + roll) - (Board.MAX_SPACE_INDEX + 1);
             currentBalance += 200;
@@ -108,14 +108,12 @@ public class Player {
      * @param index
      *            - the index of the space.
      */
-    public void moveTo(int index) {
+    public void moveTo(final int index) {
 
         if (index > 0 && index <= Board.MAX_SPACE_INDEX) {
-            this.currentSpace = index;
-        }
-        else {
+            currentSpace = index;
+        } else
             throw new IllegalArgumentException("Invalid Space");
-        }
 
     }
 
@@ -129,28 +127,26 @@ public class Player {
      * @param compulsory
      *            - fines and rent must be paid.
      */
-    public void pay(int amount, boolean compulsory) throws IllegalArgumentException {
+    public void pay(final int amount, final boolean compulsory) throws IllegalArgumentException {
 
         if (amount > 0) {
 
             if (compulsory) {
-                log.info("[" + name + "] paid [" + amount + "] to the bank.");
+                LOG.info("[" + name + "] paid [" + amount + "] to the bank.");
 
                 currentBalance -= amount;
             } else {
 
                 if ((currentBalance - amount) > 0) {
-                    log.info("[" + name + "] paid [" + amount + "] to the bank.");
+                    LOG.info("[" + name + "] paid [" + amount + "] to the bank.");
 
                     currentBalance -= amount;
-                } else {
+                } else
                     throw new IllegalArgumentException("Not enough money to complete the transaction");
-                }
             }
 
-        } else {
+        } else
             throw new IllegalArgumentException("Invalid Amount");
-        }
     }
 
     /**
@@ -163,7 +159,7 @@ public class Player {
      * @param compulsory
      *            - fines and rent must be paid.
      */
-    public void pay(Player otherPlayer, int amount, boolean compulsory) {
+    public void pay(final Player otherPlayer, final int amount, final boolean compulsory) {
         pay(amount, compulsory);
         otherPlayer.receive(amount);
     }
@@ -174,9 +170,9 @@ public class Player {
      * @param amount
      *            - Amount to receive.
      */
-    public void receive(int amount) {
+    public void receive(final int amount) {
 
-        log.info("[" + name + "] received [" + amount + "]");
+        LOG.info("[" + name + "] received [" + amount + "]");
 
         currentBalance += amount;
     }
@@ -188,7 +184,7 @@ public class Player {
      * @param property
      *            - the property to buy.
      */
-    public void buy(Property property) {
+    public void buy(final Property property) {
 
         if (property.getOwner() == null) {
             try {
@@ -196,27 +192,26 @@ public class Player {
                 inventory.add(property);
                 property.setOwner(this);
 
-                log.info("[" + name + "] bought [" + property + "]");
+                LOG.info("[" + name + "] bought [" + property + "]");
 
-            } catch (IllegalArgumentException iae) {
+            } catch (final IllegalArgumentException iae) {
 
-                log.error("Can't buy [" + property + "] - Not enough money!");
+                LOG.error("Can't buy [" + property + "] - Not enough money!");
 
                 throw new IllegalArgumentException("Cannot buy [" + property + "] - Not enough money", iae);
             }
-        } else {
+        } else
             throw new IllegalStateException("Cannot buy [" + property + "] - Already Owned by [" + property.getOwner()
                     + "]");
-        }
     }
 
     /**
-     * Mortgage a property owned by the player, player receives the mortgage value of the property/
+     * Mortgage a property owned by the player, player receives the mortgage value of the property.
      * 
      * @param property
      *            - the property to mortgage.
      */
-    public void mortgage(Property property) {
+    public void mortgage(final Property property) {
 
         if (inventory.contains(property)) {
 
@@ -225,12 +220,10 @@ public class Player {
                 property.mortgage(true);
                 receive(property.getMortgageValue());
 
-            } else {
+            } else
                 throw new IllegalStateException(property.getName() + " has already been mortgaged.");
-            }
-        } else {
+        } else
             throw new IllegalStateException("Cannot mortgage a Property you don't own.");
-        }
     }
 
     /**
@@ -239,7 +232,7 @@ public class Player {
      * @param property
      *            - property to unmortgage.
      */
-    public void unmortgage(Property property) {
+    public void unmortgage(final Property property) {
 
         if (inventory.contains(property)) {
 
@@ -248,16 +241,14 @@ public class Player {
                 try {
                     pay(property.getMortgageValue(), false);
                     property.mortgage(false);
-                } catch (IllegalArgumentException iae) {
+                } catch (final IllegalArgumentException iae) {
                     throw new IllegalArgumentException("Insufficient funds to unmortgage " + property.getName(), iae);
                 }
 
-            } else {
+            } else
                 throw new IllegalStateException(property.getName() + " has not been mortgaged.");
-            }
-        } else {
+        } else
             throw new IllegalStateException("Cannot unmortgage a Property you don't own.");
-        }
 
     }
 

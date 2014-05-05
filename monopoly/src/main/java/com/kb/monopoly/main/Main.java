@@ -18,14 +18,14 @@ import org.apache.log4j.Logger;
  */
 public class Main {
 
-    private static final Logger log = Logger.getLogger(Main.class);
+    private static final Logger LOG = Logger.getLogger(Main.class);
 
     /**
      * @param args
      */
     public static void main(String[] args) {
 
-        log.error("Not yet implemented");
+        LOG.error("Not yet implemented");
 
     }
 

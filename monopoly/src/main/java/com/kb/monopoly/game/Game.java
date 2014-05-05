@@ -18,14 +18,14 @@ import com.kb.monopoly.player.Player;
  */
 public class Game {
 
-    private static final Logger log = Logger.getLogger(Game.class);
+    private static final Logger LOG = Logger.getLogger(Game.class);
 
     private final ArrayList<Player> playerList = new ArrayList<Player>();
     private final Board board;
 
-    private Dice dice = new Dice();
+    private DiceRoller dice = new DiceRoller();
 
-    private int currentPlayerIndex = 0;
+    private int currentPlayerIndex;
     private int currentTurn = 1;
 
     private Player currentPlayer;
@@ -35,7 +35,7 @@ public class Game {
      */
     public Game() {
 
-        this.board = new Board();
+        board = new Board();
 
     }
 
@@ -44,9 +44,9 @@ public class Game {
      * 
      * @param player
      */
-    public void addPlayer(Player player) {
+    public void addPlayer(final Player player) {
 
-        log.info("Adding Player[" + player + "] to the game");
+        LOG.info("Adding Player[" + player + "] to the game");
 
         playerList.add(player);
 
@@ -82,21 +82,20 @@ public class Game {
     }
 
     /**
-     * Start a Game
+     * Start a Game.
      */
     public void startGame() {
 
         if (playerList.size() >= 2 && playerList.size() <= 4) {
-            log.info("===== Starting Game =====");
+            LOG.info("===== Starting Game =====");
 
             currentPlayer = rollForFirstTurn();
             currentPlayerIndex = playerList.indexOf(currentPlayer);
 
             startTurn(currentPlayer);
 
-        } else {
+        } else
             throw new IllegalStateException("Not enough players to start a Game");
-        }
     }
 
     /**
@@ -104,17 +103,17 @@ public class Game {
      * 
      * @param currentPlayer
      */
-    private void startTurn(Player currentPlayer) {
+    private void startTurn(final Player currentPlayer) {
 
-        log.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
+        LOG.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
     }
 
     /**
-     * End the current Turn and move to the next Player
+     * End the current Turn and move to the next Player.
      */
     public void endTurn() {
 
-        log.info("----- Ending Turn - " + currentPlayer + " - Turn " + currentTurn + " -----");
+        LOG.info("----- Ending Turn - " + currentPlayer + " - Turn " + currentTurn + " -----");
 
         if (++currentPlayerIndex == playerList.size()) {
             currentPlayerIndex = 0;
@@ -136,9 +135,9 @@ public class Game {
         int highestRoll = 0;
         Player first = null;
 
-        for (Player player : playerList) {
+        for (final Player player : playerList) {
 
-            int roll = rollDie();
+            final int roll = rollDie();
 
             if (roll > highestRoll) {
                 highestRoll = roll;
@@ -171,7 +170,7 @@ public class Game {
      * 
      * @param dice
      */
-    public void setDice(Dice dice) {
+    public void setDice(final DiceRoller dice) {
         this.dice = dice;
     }
 }

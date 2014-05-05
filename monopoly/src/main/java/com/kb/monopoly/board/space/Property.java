@@ -4,7 +4,7 @@
  * Created - 22 Apr 2014
  * Last Updated - 22 Apr 2014
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
 
 import com.kb.monopoly.player.Player;
 
@@ -15,7 +15,7 @@ import com.kb.monopoly.player.Player;
 public abstract class Property extends Space {
 
     protected final int value;
-    protected Player ownedBy = null;
+    protected Player ownedBy;
     protected final int mortgageValue;
     protected boolean mortgaged;
 
@@ -27,10 +27,10 @@ public abstract class Property extends Space {
      * @param value
      *            - The value of the space
      */
-    public Property(String name, int value, int mortgageValue) {
+    public Property(final String name, final int value) {
         super(name);
         this.value = value;
-        this.mortgageValue = mortgageValue;
+        mortgageValue = value / 2;
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class Property extends Space {
     public abstract int calculateRent() throws IllegalAccessException;
 
     /**
-     * Get the value of the space
+     * Get the value of the space.
      * 
      * @return - value of the space.
      */
@@ -70,9 +70,9 @@ public abstract class Property extends Space {
      * @param player
      *            - new owner of this property.
      */
-    public void setOwner(Player player) {
+    public void setOwner(final Player player) {
 
-        this.ownedBy = player;
+        ownedBy = player;
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class Property extends Space {
      * 
      * @param mortgaged
      */
-    public void mortgage(boolean mortgaged) {
+    public void mortgage(final boolean mortgaged) {
         this.mortgaged = mortgaged;
 
     }
@@ -110,6 +110,6 @@ public abstract class Property extends Space {
      */
     @Override
     public String toString() {
-        return super.toString() + " (" + value + ")";
+        return super.toString();
     }
 }

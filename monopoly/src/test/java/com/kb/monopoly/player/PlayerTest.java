@@ -9,8 +9,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.Property;
-import com.kb.monopoly.board.Station;
+import com.kb.monopoly.board.space.Property;
+import com.kb.monopoly.board.space.Station;
 
 /**
  * @author kbennett

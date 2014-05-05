@@ -1,7 +1,12 @@
 /**
  * 
  */
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space;
+
+import java.util.ArrayList;
+
+import com.kb.monopoly.board.PropertySets;
+import com.kb.monopoly.board.PropertySets.SetColour;
 
 /**
  * @author kbennett
@@ -13,7 +18,7 @@ public class Street extends Property {
 
     private final PropertySets.SetColour setColour;
 
-    private int buildingCount = 0;
+    private int buildingCount;
 
     private final int buildingCost;
 
@@ -35,20 +40,19 @@ public class Street extends Property {
      * @param rent
      *            - the different levels of rent for this street.
      */
-    public Street(String name, int value, int mortgageValue, PropertySets.SetColour setColour, int buildingCost,
-            int[] rent) {
-        super(name, value, mortgageValue);
+    public Street(final String name, final int value, final PropertySets.SetColour setColour, final int buildingCost,
+            final int[] rent) {
+        super(name, value);
 
         this.setColour = setColour;
         this.buildingCost = buildingCost;
 
         if (rent.length == 6) {
 
-            this.rentLevels = rent;
+            rentLevels = rent;
 
-        } else {
+        } else
             throw new IllegalArgumentException("Invalid rent levels - must have 6 rent levels");
-        }
     }
 
     /**
@@ -58,9 +62,8 @@ public class Street extends Property {
 
         if (buildingCount < MAX_HOUSES) {
             buildingCount++;
-        } else {
+        } else
             throw new IllegalStateException("Can't have more than 4 Houses per Street");
-        }
     }
 
     /**
@@ -73,12 +76,10 @@ public class Street extends Property {
 
                 buildingCount++;
 
-            } else {
+            } else
                 throw new IllegalStateException("Must have 4 Houses before building a Hotel");
-            }
-        } else {
+        } else
             throw new IllegalStateException("There is already a Hotel on this Street");
-        }
     }
 
     /*
@@ -90,14 +91,38 @@ public class Street extends Property {
     public int calculateRent() throws IllegalAccessException {
 
         if (ownedBy != null) {
-            return rentLevels[buildingCount];
-        } else {
+
+            int rent = 0;
+
+            if (undevelopedPropertySet()) {
+                rent = rentLevels[0] * 2;
+            } else {
+
+                rent = rentLevels[buildingCount];
+            }
+            return rent;
+        } else
             throw new IllegalAccessException("No-one owns " + name);
+    }
+
+    private boolean undevelopedPropertySet() {
+
+        final ArrayList<Street> set = PropertySets.getPropertySet(setColour);
+
+        if (ownedBy.getInventory().containsAll(set)) {
+            for (final Street s : set) {
+                if (s.getBuildingCount() > 0)
+                    return false;
+            }
+
+            return true;
         }
+
+        return false;
     }
 
     /**
-     * Get the number of buildings added to this street
+     * Get the number of buildings added to this street.
      * 
      * 0-4 houses 5 Hotel
      * 
