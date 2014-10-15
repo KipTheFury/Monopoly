@@ -6,7 +6,7 @@ package com.kb.monopoly.board;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.collections4.list.FixedSizeList;
@@ -29,7 +29,8 @@ import com.kb.monopoly.board.space.TaxSpace;
  * @author kbennett
  * 
  */
-public class Board {
+public class Board
+{
 
     private static final Logger LOG = Logger.getLogger(Board.class);
 
@@ -49,8 +50,7 @@ public class Board {
     private FixedSizeList<Space> spaces;
 
     private final Collection<String> chanceCards = new ArrayList<String>(16);
-    private final Collection<String> communityChestCards = new ArrayList<String>(
-            16);
+    private final Collection<String> communityChestCards = new ArrayList<String>(16);
 
     private int houses = 32;
     private int hotels = 12;
@@ -62,7 +62,8 @@ public class Board {
     /**
      * Constructor. Loads the Spaces and Cards
      */
-    public Board() {
+    public Board()
+    {
 
         boardLoader = new JSONBoardLoader();
 
@@ -73,11 +74,13 @@ public class Board {
     /**
      * Load the Chance and Community Chest Cards.
      */
-    private void loadCards() {
+    private void loadCards()
+    {
 
         LOG.info("Loading Cards...");
 
-        for (int j = 0; j < 16; j++) {
+        for (int j = 0; j < 16; j++)
+        {
             chanceCards.add("ChanceCard " + j);
             communityChestCards.add("CommunityChestCard " + j);
         }
@@ -86,7 +89,8 @@ public class Board {
     /**
      * Load the Spaces.
      */
-    private void loadSpaces() {
+    private void loadSpaces()
+    {
 
         LOG.info("Loading Spaces...");
 
@@ -100,23 +104,27 @@ public class Board {
         spacesArray[INCOME_TAX] = new TaxSpace("Income Tax", 200);
         spacesArray[SUPER_TAX] = new TaxSpace("Super Tax", 100);
 
-        final HashMap<Integer, Property> properties = boardLoader.loadProperties(defaultFileLocation);
+        final Map<Integer, Property> properties = boardLoader.loadProperties(defaultFileLocation);
 
-        for (final Entry<Integer, Property> property : properties.entrySet()) {
+        for (final Entry<Integer, Property> property : properties.entrySet())
+        {
             spacesArray[property.getKey()] = property.getValue();
         }
 
-        for (final Integer i : COMMUNITY_CHEST) {
+        for (final Integer i : COMMUNITY_CHEST)
+        {
             spacesArray[i] = new CardSpace("Community Chest", CardType.CommunityChest);
         }
 
-        for (final Integer i : CHANCE) {
+        for (final Integer i : CHANCE)
+        {
             spacesArray[i] = new CardSpace("Chance", CardType.Chance);
         }
 
         spaces = FixedSizeList.fixedSizeList(Arrays.asList(spacesArray));
 
-        for (final Space s : spaces) {
+        for (final Space s : spaces)
+        {
             LOG.info(s);
         }
     }
@@ -128,7 +136,8 @@ public class Board {
      *            - the index of the space on the board (0-39)
      * @return - The space at the given index.
      */
-    public Space getSpace(final int index) {
+    public Space getSpace(final int index)
+    {
 
         return spaces.get(index);
     }
@@ -138,7 +147,8 @@ public class Board {
      * 
      * @return - Collection of all spaces
      */
-    public Collection<Space> getSpaces() {
+    public Collection<Space> getSpaces()
+    {
 
         return spaces;
     }
@@ -148,7 +158,8 @@ public class Board {
      * 
      * @return - Collection of all Chance cards.
      */
-    public Collection<String> getChanceCards() {
+    public Collection<String> getChanceCards()
+    {
 
         return chanceCards;
     }
@@ -158,7 +169,8 @@ public class Board {
      * 
      * @return - Collection of Community Chest cards.
      */
-    public Collection<String> getCommunityChestCards() {
+    public Collection<String> getCommunityChestCards()
+    {
 
         return communityChestCards;
     }
@@ -166,7 +178,8 @@ public class Board {
     /**
      * @return the houses
      */
-    public int getHouses() {
+    public int getHouses()
+    {
         return houses;
     }
 
@@ -174,14 +187,16 @@ public class Board {
      * @param houses
      *            the houses to set
      */
-    public void setHouses(final int houses) {
+    public void setHouses(final int houses)
+    {
         this.houses = houses;
     }
 
     /**
      * @return the hotels
      */
-    public int getHotels() {
+    public int getHotels()
+    {
         return hotels;
     }
 
@@ -189,7 +204,8 @@ public class Board {
      * @param hotels
      *            the hotels to set
      */
-    public void setHotels(final int hotels) {
+    public void setHotels(final int hotels)
+    {
         this.hotels = hotels;
     }
 

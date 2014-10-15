@@ -4,6 +4,7 @@
 package com.kb.monopoly.game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -16,11 +17,12 @@ import com.kb.monopoly.player.Player;
  * @author kbennett
  * 
  */
-public class Game {
+public class Game
+{
 
     private static final Logger LOG = Logger.getLogger(Game.class);
 
-    private final ArrayList<Player> playerList = new ArrayList<Player>();
+    private final List<Player> playerList = new ArrayList<Player>();
     private final Board board;
 
     private DiceRoller dice = new DiceRoller();
@@ -33,7 +35,8 @@ public class Game {
     /**
      * Constructor - Set up the board.
      */
-    public Game() {
+    public Game()
+    {
 
         board = new Board();
 
@@ -44,7 +47,8 @@ public class Game {
      * 
      * @param player
      */
-    public void addPlayer(final Player player) {
+    public void addPlayer(final Player player)
+    {
 
         LOG.info("Adding Player[" + player + "] to the game");
 
@@ -57,7 +61,8 @@ public class Game {
      * 
      * @return - ArrayList of players.
      */
-    public ArrayList<Player> getPlayerList() {
+    public List<Player> getPlayerList()
+    {
 
         return playerList;
     }
@@ -67,7 +72,8 @@ public class Game {
      * 
      * @return - The Board.
      */
-    public Object getBoard() {
+    public Board getBoard()
+    {
 
         return board;
     }
@@ -77,16 +83,19 @@ public class Game {
      * 
      * @return - random result of a 6-sided Dice
      */
-    public int rollDie() {
+    public int rollDie()
+    {
         return dice.roll();
     }
 
     /**
      * Start a Game.
      */
-    public void startGame() {
+    public void startGame()
+    {
 
-        if (playerList.size() >= 2 && playerList.size() <= 4) {
+        if (playerList.size() >= 2 && playerList.size() <= 4)
+        {
             LOG.info("===== Starting Game =====");
 
             currentPlayer = rollForFirstTurn();
@@ -94,8 +103,11 @@ public class Game {
 
             startTurn(currentPlayer);
 
-        } else
+        }
+        else
+        {
             throw new IllegalStateException("Not enough players to start a Game");
+        }
     }
 
     /**
@@ -103,7 +115,8 @@ public class Game {
      * 
      * @param currentPlayer
      */
-    private void startTurn(final Player currentPlayer) {
+    private void startTurn(final Player currentPlayer)
+    {
 
         LOG.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
     }
@@ -111,11 +124,13 @@ public class Game {
     /**
      * End the current Turn and move to the next Player.
      */
-    public void endTurn() {
+    public void endTurn()
+    {
 
         LOG.info("----- Ending Turn - " + currentPlayer + " - Turn " + currentTurn + " -----");
 
-        if (++currentPlayerIndex == playerList.size()) {
+        if (++currentPlayerIndex == playerList.size())
+        {
             currentPlayerIndex = 0;
             currentTurn++;
         }
@@ -126,20 +141,24 @@ public class Game {
     }
 
     /**
-     * Each player rolls a dice, return the player who scored the highest to take the first turn.
+     * Each player rolls a dice, return the player who scored the highest to
+     * take the first turn.
      * 
      * @return - player with the highest dice roll.
      */
-    public Player rollForFirstTurn() {
+    public Player rollForFirstTurn()
+    {
 
         int highestRoll = 0;
         Player first = null;
 
-        for (final Player player : playerList) {
+        for (final Player player : playerList)
+        {
 
             final int roll = rollDie();
 
-            if (roll > highestRoll) {
+            if (roll > highestRoll)
+            {
                 highestRoll = roll;
                 first = player;
             }
@@ -151,14 +170,16 @@ public class Game {
     /**
      * @return the currentPlayer.
      */
-    public Player getCurrentPlayer() {
+    public Player getCurrentPlayer()
+    {
         return currentPlayer;
     }
 
     /**
      * @return the Current turn number
      */
-    public int getCurrentTurn() {
+    public int getCurrentTurn()
+    {
 
         return currentTurn;
     }
@@ -170,7 +191,8 @@ public class Game {
      * 
      * @param dice
      */
-    public void setDice(final DiceRoller dice) {
+    public void setDice(final DiceRoller dice)
+    {
         this.dice = dice;
     }
 }

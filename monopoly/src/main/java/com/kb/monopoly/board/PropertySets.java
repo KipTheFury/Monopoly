@@ -2,6 +2,8 @@ package com.kb.monopoly.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.kb.monopoly.board.space.Street;
 
@@ -9,9 +11,11 @@ import com.kb.monopoly.board.space.Street;
  * @author kbennett
  * 
  */
-public final class PropertySets {
+public final class PropertySets
+{
 
-    private PropertySets() {
+    private PropertySets()
+    {
 
     }
 
@@ -21,20 +25,14 @@ public final class PropertySets {
      * @author kbennett
      * 
      */
-    public enum SetColour {
+    public enum SetColour
+    {
 
-        Brown,
-        LightBlue,
-        Magenta,
-        Orange,
-        Red,
-        Yellow,
-        Green,
-        DarkBlue;
+        Brown, LightBlue, Magenta, Orange, Red, Yellow, Green, DarkBlue;
 
     }
 
-    private static HashMap<SetColour, ArrayList<Street>> sets = new HashMap<SetColour, ArrayList<Street>>();
+    private static Map<SetColour, ArrayList<Street>> sets = new HashMap<SetColour, ArrayList<Street>>();
 
     /**
      * Get an ArrayList of streets for a colour set.
@@ -43,7 +41,8 @@ public final class PropertySets {
      *            the set colour.
      * @return - the streets in that set.
      */
-    public static ArrayList<Street> getPropertySet(final SetColour colour) {
+    public static List<Street> getPropertySet(final SetColour colour)
+    {
 
         return sets.get(colour);
     }
@@ -56,7 +55,8 @@ public final class PropertySets {
      * @param streets
      *            - the streets in that set.
      */
-    public static void addPropertySet(final SetColour colour, final ArrayList<Street> streets) {
+    public static void addPropertySet(final SetColour colour, final ArrayList<Street> streets)
+    {
         sets.put(colour, streets);
     }
 }

@@ -4,6 +4,7 @@
 package com.kb.monopoly.player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -16,7 +17,8 @@ import com.kb.monopoly.board.space.Property;
  * @author kbennett
  * 
  */
-public class Player {
+public class Player
+{
 
     private static final Logger LOG = Logger.getLogger(Player.class);
 
@@ -24,7 +26,7 @@ public class Player {
     private int currentBalance;
     private int currentSpace;
 
-    private final ArrayList<Property> inventory = new ArrayList<Property>();
+    private final List<Property> inventory = new ArrayList<Property>();
 
     /**
      * Constructor.
@@ -32,7 +34,8 @@ public class Player {
      * @param name
      *            - the player's name.
      */
-    public Player(final String name) {
+    public Player(final String name)
+    {
         this.name = name;
         currentBalance = 1500;
         currentSpace = 0;
@@ -43,7 +46,8 @@ public class Player {
      * 
      * @return - The player's name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -52,7 +56,8 @@ public class Player {
      * 
      * @return - current balance.
      */
-    public int getCurrentBalance() {
+    public int getCurrentBalance()
+    {
 
         return currentBalance;
     }
@@ -62,7 +67,8 @@ public class Player {
      * 
      * @return - index of current position.
      */
-    public int getCurrentSpace() {
+    public int getCurrentSpace()
+    {
 
         return currentSpace;
     }
@@ -72,27 +78,33 @@ public class Player {
      * 
      * @return
      */
-    public ArrayList<Property> getInventory() {
+    public List<Property> getInventory()
+    {
         return inventory;
     }
 
     /**
-     * Move forward a given number of spaces. If the move would move them past the 39th space, they
-     * have effectively passed Go and are given 200.
+     * Move forward a given number of spaces. If the move would move them past
+     * the 39th space, they have effectively passed Go and are given 200.
      * 
      * @param roll
      *            - the number of spaces to move
      */
-    public void move(final int roll) {
+    public void move(final int roll)
+    {
 
-        if (roll < 2 || roll > 12) {
+        if (roll < 2 || roll > 12)
+        {
             LOG.error("Invalid Roll");
             throw new IllegalArgumentException("Invalid Roll");
         }
 
-        if (currentSpace + roll <= Board.MAX_SPACE_INDEX) {
+        if (currentSpace + roll <= Board.MAX_SPACE_INDEX)
+        {
             currentSpace += roll;
-        } else {
+        }
+        else
+        {
 
             LOG.info("[" + name + "] passed Go! Collect 200");
 
@@ -108,45 +120,59 @@ public class Player {
      * @param index
      *            - the index of the space.
      */
-    public void moveTo(final int index) {
+    public void moveTo(final int index)
+    {
 
-        if (index > 0 && index <= Board.MAX_SPACE_INDEX) {
+        if (index > 0 && index <= Board.MAX_SPACE_INDEX)
+        {
             currentSpace = index;
-        } else
+        }
+        else
+        {
             throw new IllegalArgumentException("Invalid Space");
-
+        }
     }
 
     /**
-     * Pay money to the bank. The player cannot optionally pay more than their current balance.
-     * Paying a fine or rent to another player must be paid and can take the players balance below
-     * zero.
+     * Pay money to the bank. The player cannot optionally pay more than their
+     * current balance. Paying a fine or rent to another player must be paid and
+     * can take the players balance below zero.
      * 
      * @param amount
      *            - Amount to pay.
      * @param compulsory
      *            - fines and rent must be paid.
      */
-    public void pay(final int amount, final boolean compulsory) throws IllegalArgumentException {
+    public void pay(final int amount, final boolean compulsory) throws IllegalArgumentException
+    {
 
-        if (amount > 0) {
+        if (amount > 0)
+        {
 
-            if (compulsory) {
+            if (compulsory)
+            {
                 LOG.info("[" + name + "] paid [" + amount + "] to the bank.");
 
                 currentBalance -= amount;
-            } else {
+            }
+            else
+            {
 
-                if ((currentBalance - amount) > 0) {
+                if ((currentBalance - amount) > 0)
+                {
                     LOG.info("[" + name + "] paid [" + amount + "] to the bank.");
 
                     currentBalance -= amount;
-                } else
+                }
+                else
                     throw new IllegalArgumentException("Not enough money to complete the transaction");
             }
 
-        } else
+        }
+        else
+        {
             throw new IllegalArgumentException("Invalid Amount");
+        }
     }
 
     /**
@@ -159,7 +185,8 @@ public class Player {
      * @param compulsory
      *            - fines and rent must be paid.
      */
-    public void pay(final Player otherPlayer, final int amount, final boolean compulsory) {
+    public void pay(final Player otherPlayer, final int amount, final boolean compulsory)
+    {
         pay(amount, compulsory);
         otherPlayer.receive(amount);
     }
@@ -170,7 +197,8 @@ public class Player {
      * @param amount
      *            - Amount to receive.
      */
-    public void receive(final int amount) {
+    public void receive(final int amount)
+    {
 
         LOG.info("[" + name + "] received [" + amount + "]");
 
@@ -178,78 +206,107 @@ public class Player {
     }
 
     /**
-     * Buy a property, add it to inventory provided the player can afford it and it is not already
-     * owned by another player.
+     * Buy a property, add it to inventory provided the player can afford it and
+     * it is not already owned by another player.
      * 
      * @param property
      *            - the property to buy.
      */
-    public void buy(final Property property) {
+    public void buy(final Property property)
+    {
 
-        if (property.getOwner() == null) {
-            try {
+        if (property.getOwner() == null)
+        {
+            try
+            {
                 pay(property.getValue(), false);
                 inventory.add(property);
                 property.setOwner(this);
 
                 LOG.info("[" + name + "] bought [" + property + "]");
 
-            } catch (final IllegalArgumentException iae) {
+            }
+            catch (final IllegalArgumentException iae)
+            {
 
                 LOG.error("Can't buy [" + property + "] - Not enough money!");
 
                 throw new IllegalArgumentException("Cannot buy [" + property + "] - Not enough money", iae);
             }
-        } else
-            throw new IllegalStateException("Cannot buy [" + property + "] - Already Owned by [" + property.getOwner()
-                    + "]");
+        }
+        else
+        {
+            throw new IllegalStateException("Cannot buy [" + property + "] - Already Owned by [" + property.getOwner() + "]");
+        }
     }
 
     /**
-     * Mortgage a property owned by the player, player receives the mortgage value of the property.
+     * Mortgage a property owned by the player, player receives the mortgage
+     * value of the property.
      * 
      * @param property
      *            - the property to mortgage.
      */
-    public void mortgage(final Property property) {
+    public void mortgage(final Property property)
+    {
 
-        if (inventory.contains(property)) {
+        if (inventory.contains(property))
+        {
 
-            if (!property.isMortgaged()) {
+            if (!property.isMortgaged())
+            {
 
                 property.mortgage(true);
                 receive(property.getMortgageValue());
 
-            } else
+            }
+            else
+            {
                 throw new IllegalStateException(property.getName() + " has already been mortgaged.");
-        } else
+            }
+        }
+        else
+        {
             throw new IllegalStateException("Cannot mortgage a Property you don't own.");
+        }
     }
 
     /**
-     * Un-mortgage a mortgaged property. Player must pay the mortgage value of the property.
+     * Un-mortgage a mortgaged property. Player must pay the mortgage value of
+     * the property.
      * 
      * @param property
      *            - property to unmortgage.
      */
-    public void unmortgage(final Property property) {
+    public void unmortgage(final Property property)
+    {
 
-        if (inventory.contains(property)) {
+        if (inventory.contains(property))
+        {
 
-            if (property.isMortgaged()) {
+            if (property.isMortgaged())
+            {
 
-                try {
+                try
+                {
                     pay(property.getMortgageValue(), false);
                     property.mortgage(false);
-                } catch (final IllegalArgumentException iae) {
+                }
+                catch (final IllegalArgumentException iae)
+                {
                     throw new IllegalArgumentException("Insufficient funds to unmortgage " + property.getName(), iae);
                 }
 
-            } else
+            }
+            else
+            {
                 throw new IllegalStateException(property.getName() + " has not been mortgaged.");
-        } else
+            }
+        }
+        else
+        {
             throw new IllegalStateException("Cannot unmortgage a Property you don't own.");
-
+        }
     }
 
     /*
@@ -258,7 +315,8 @@ public class Player {
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return name;
     }
 

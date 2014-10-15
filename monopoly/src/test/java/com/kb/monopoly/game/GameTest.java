@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,8 @@ import com.kb.monopoly.player.Player;
  * @author kbennett
  * 
  */
-public class GameTest {
+public class GameTest
+{
 
     private Game g;
 
@@ -33,7 +34,8 @@ public class GameTest {
      * @throws java.lang.Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception
+    {
         g = new Game();
 
         bob = new Player("Bob");
@@ -44,21 +46,25 @@ public class GameTest {
     }
 
     @Test
-    public void gameHasBoard() throws Exception {
+    public void gameHasBoard() throws Exception
+    {
         assertNotNull(g.getBoard());
     }
 
     @Test
-    public void canRollDie() throws Exception {
+    public void canRollDie() throws Exception
+    {
 
-        for (int i = 0; i < 10; i++) {
-            int roll = g.rollDie();
+        for (int i = 0; i < 10; i++)
+        {
+            final int roll = g.rollDie();
             assertTrue(roll >= 1 && roll <= 6);
         }
     }
 
     @Test
-    public void canStartGame() throws Exception {
+    public void canStartGame() throws Exception
+    {
 
         g.addPlayer(bob);
         g.addPlayer(jane);
@@ -67,25 +73,28 @@ public class GameTest {
     }
 
     @Test
-    public void canGetPlayerList() throws Exception {
+    public void canGetPlayerList() throws Exception
+    {
 
         g.addPlayer(bob);
         g.addPlayer(jane);
 
-        ArrayList<Player> players = g.getPlayerList();
+        final List<Player> players = g.getPlayerList();
 
         assertTrue(players.contains(bob) && players.contains(jane));
     }
 
     @Test(expected = IllegalStateException.class)
-    public void cannotStartAGameWithLessThan2Players() throws Exception {
+    public void cannotStartAGameWithLessThan2Players() throws Exception
+    {
 
         g.addPlayer(bob);
         g.startGame();
     }
 
     @Test(expected = IllegalStateException.class)
-    public void cannotStartAGameWithMoreThan4Players() throws Exception {
+    public void cannotStartAGameWithMoreThan4Players() throws Exception
+    {
         g.addPlayer(bob);
         g.addPlayer(jane);
         g.addPlayer(fred);
@@ -96,9 +105,10 @@ public class GameTest {
     }
 
     @Test
-    public void canRollForFirstTurn() throws Exception {
+    public void canRollForFirstTurn() throws Exception
+    {
 
-        DiceRoller mockDice = mock(DiceRoller.class);
+        final DiceRoller mockDice = mock(DiceRoller.class);
         g.setDice(mockDice);
 
         g.addPlayer(bob);
@@ -114,9 +124,10 @@ public class GameTest {
     }
 
     @Test
-    public void turnNumberIncrementsAfterAllPlayersHaveEndedTurns() throws Exception {
+    public void turnNumberIncrementsAfterAllPlayersHaveEndedTurns() throws Exception
+    {
 
-        DiceRoller mockDice = mock(DiceRoller.class);
+        final DiceRoller mockDice = mock(DiceRoller.class);
         g.setDice(mockDice);
 
         g.addPlayer(bob);
@@ -126,7 +137,7 @@ public class GameTest {
 
         g.startGame();
 
-        int currentTurnNumber = g.getCurrentTurn();
+        final int currentTurnNumber = g.getCurrentTurn();
 
         assertEquals(bob, g.getCurrentPlayer());
 
