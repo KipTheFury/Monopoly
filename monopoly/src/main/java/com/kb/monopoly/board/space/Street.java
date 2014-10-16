@@ -14,7 +14,6 @@ import com.kb.monopoly.board.PropertySets.SetColour;
  */
 public class Street extends Property
 {
-
     private static final int MAX_HOUSES = 4;
 
     private final SetColour setColour;
@@ -50,9 +49,7 @@ public class Street extends Property
 
         if (rent.length == 6)
         {
-
-            rentLevels = rent;
-
+            rentLevels = rent.clone();
         }
         else
         {
@@ -65,7 +62,6 @@ public class Street extends Property
      */
     public void addHouse()
     {
-
         if (buildingCount < MAX_HOUSES)
         {
             buildingCount++;
@@ -81,14 +77,11 @@ public class Street extends Property
      */
     public void addHotel()
     {
-
         if (buildingCount <= MAX_HOUSES)
         {
             if (buildingCount == MAX_HOUSES)
             {
-
                 buildingCount++;
-
             }
             else
             {
@@ -109,10 +102,8 @@ public class Street extends Property
     @Override
     public int calculateRent() throws IllegalAccessException
     {
-
-        if (ownedBy != null)
+        if (getOwnedBy() != null)
         {
-
             int rent = 0;
 
             if (undevelopedPropertySet())
@@ -121,28 +112,28 @@ public class Street extends Property
             }
             else
             {
-
                 rent = rentLevels[buildingCount];
             }
             return rent;
         }
         else
         {
-            throw new IllegalAccessException("No-one owns " + name);
+            throw new IllegalAccessException("No-one owns " + getName());
         }
     }
 
     private boolean undevelopedPropertySet()
     {
-
         final List<Street> set = PropertySets.getPropertySet(setColour);
 
-        if (ownedBy.getInventory().containsAll(set))
+        if (getOwnedBy().getPortfolio().getProperties().containsAll(set))
         {
             for (final Street s : set)
             {
                 if (s.getBuildingCount() > 0)
+                {
                     return false;
+                }
             }
 
             return true;

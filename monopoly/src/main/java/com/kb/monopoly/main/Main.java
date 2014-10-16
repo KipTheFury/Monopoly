@@ -16,17 +16,20 @@ import org.apache.log4j.Logger;
  * @author Kyle
  * 
  */
-public class Main {
-
+public class Main
+{
     private static final Logger LOG = Logger.getLogger(Main.class);
+
+    public Main()
+    {
+
+    }
 
     /**
      * @param args
      */
-    public static void main(String[] args) {
-
+    public static void main(final String[] args)
+    {
         LOG.error("Not yet implemented");
-
     }
-
 }

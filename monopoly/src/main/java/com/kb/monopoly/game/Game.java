@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.kb.monoploy.turn.Turn;
 import com.kb.monopoly.board.Board;
 import com.kb.monopoly.player.Player;
 
@@ -22,6 +23,11 @@ public class Game
 
     private static final Logger LOG = Logger.getLogger(Game.class);
 
+    public static enum GameState
+    {
+        PRE_GAME, IN_PROGRESS, ENDED;
+    }
+
     private final List<Player> playerList = new ArrayList<Player>();
     private final Board board;
 
@@ -32,14 +38,14 @@ public class Game
 
     private Player currentPlayer;
 
+    private GameState gameState = GameState.PRE_GAME;
+
     /**
      * Constructor - Set up the board.
      */
     public Game()
     {
-
         board = new Board();
-
     }
 
     /**
@@ -49,11 +55,9 @@ public class Game
      */
     public void addPlayer(final Player player)
     {
-
         LOG.info("Adding Player[" + player + "] to the game");
 
         playerList.add(player);
-
     }
 
     /**
@@ -63,7 +67,6 @@ public class Game
      */
     public List<Player> getPlayerList()
     {
-
         return playerList;
     }
 
@@ -74,7 +77,6 @@ public class Game
      */
     public Board getBoard()
     {
-
         return board;
     }
 
@@ -93,7 +95,6 @@ public class Game
      */
     public void startGame()
     {
-
         if (playerList.size() >= 2 && playerList.size() <= 4)
         {
             LOG.info("===== Starting Game =====");
@@ -101,8 +102,9 @@ public class Game
             currentPlayer = rollForFirstTurn();
             currentPlayerIndex = playerList.indexOf(currentPlayer);
 
-            startTurn(currentPlayer);
+            gameState = GameState.IN_PROGRESS;
 
+            takeTurn(currentPlayer);
         }
         else
         {
@@ -115,10 +117,20 @@ public class Game
      * 
      * @param currentPlayer
      */
-    private void startTurn(final Player currentPlayer)
+    private void takeTurn(final Player currentPlayer)
     {
+        if (gameState != GameState.ENDED)
+        {
+            LOG.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
 
-        LOG.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
+            final Turn t = new Turn(currentPlayer);
+
+            t.takeTurn();
+        }
+        else
+        {
+            postGame();
+        }
     }
 
     /**
@@ -126,7 +138,6 @@ public class Game
      */
     public void endTurn()
     {
-
         LOG.info("----- Ending Turn - " + currentPlayer + " - Turn " + currentTurn + " -----");
 
         if (++currentPlayerIndex == playerList.size())
@@ -137,7 +148,12 @@ public class Game
 
         currentPlayer = playerList.get(currentPlayerIndex);
 
-        startTurn(currentPlayer);
+        takeTurn(currentPlayer);
+    }
+
+    private void postGame()
+    {
+        LOG.info("Game has ended");
     }
 
     /**
@@ -148,13 +164,11 @@ public class Game
      */
     public Player rollForFirstTurn()
     {
-
         int highestRoll = 0;
         Player first = null;
 
         for (final Player player : playerList)
         {
-
             final int roll = rollDie();
 
             if (roll > highestRoll)
@@ -163,7 +177,6 @@ public class Game
                 first = player;
             }
         }
-
         return first;
     }
 
@@ -180,7 +193,6 @@ public class Game
      */
     public int getCurrentTurn()
     {
-
         return currentTurn;
     }
 

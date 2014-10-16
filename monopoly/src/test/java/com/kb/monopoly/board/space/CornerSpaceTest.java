@@ -14,19 +14,20 @@ import com.kb.monopoly.board.space.CornerSpace.CornerSpaces;
  * @author kbennett
  * 
  */
-public class CornerSpaceTest {
+public class CornerSpaceTest
+{
 
     private CornerSpace go;
 
     @Before
-    public void setUp() {
+    public void setUp()
+    {
         go = new CornerSpace("Go", CornerSpaces.GO);
     }
 
     @Test
-    public void canGetType() throws Exception {
-
-        final CornerSpaces c = CornerSpaces.valueOf("GO");
+    public void canGetType() throws Exception
+    {
 
         assertEquals(CornerSpaces.GO, go.getType());
     }

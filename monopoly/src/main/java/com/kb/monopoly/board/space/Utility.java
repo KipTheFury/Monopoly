@@ -10,7 +10,8 @@ package com.kb.monopoly.board.space;
  * @author Kyle
  * 
  */
-public class Utility extends Property {
+public class Utility extends Property
+{
 
     private static final int UTILITY_VALUE = 150;
 
@@ -19,7 +20,8 @@ public class Utility extends Property {
      * 
      * @param name
      */
-    public Utility(String name) {
+    public Utility(final String name)
+    {
         super(name, UTILITY_VALUE);
     }
 
@@ -29,7 +31,8 @@ public class Utility extends Property {
      * @see com.kb.monopoly.board.Ownable#calculateRent()
      */
     @Override
-    public int calculateRent() throws IllegalAccessException {
+    public int calculateRent() throws IllegalAccessException
+    {
         throw new UnsupportedOperationException("Rent Calculation for Utilities requires a dice roll");
     }
 
@@ -37,30 +40,37 @@ public class Utility extends Property {
      * @param diceRoll
      * @return
      */
-    public int calculateRent(int diceRoll) throws IllegalAccessException {
+    public int calculateRent(final int diceRoll) throws IllegalAccessException
+    {
 
-        if (ownedBy != null) {
+        if (getOwnedBy() != null)
+        {
 
             int utilityCount = 0;
 
-            for (Property o : ownedBy.getInventory()) {
-                if (o instanceof Utility) {
+            for (final Property o : getOwnedBy().getPortfolio().getProperties())
+            {
+                if (o instanceof Utility)
+                {
                     utilityCount++;
                 }
             }
 
-            switch (utilityCount) {
-            case 1:
-                return 4 * diceRoll;
-            case 2:
-                return 10 * diceRoll;
+            switch (utilityCount)
+            {
+                case 1:
+                    return 4 * diceRoll;
+                case 2:
+                    return 10 * diceRoll;
 
-            default:
-                throw new IllegalStateException("You own too many/not enough utilities");
+                default:
+                    throw new IllegalStateException("You own too many/not enough utilities");
             }
 
-        } else {
-            throw new IllegalAccessException("No-one owns " + name);
+        }
+        else
+        {
+            throw new IllegalAccessException("No-one owns " + getName());
         }
 
     }

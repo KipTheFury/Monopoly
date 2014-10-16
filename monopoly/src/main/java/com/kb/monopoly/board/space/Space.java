@@ -10,9 +10,10 @@ package com.kb.monopoly.board.space;
  * @author Kyle
  * 
  */
-public class Space {
+public class Space
+{
 
-    protected final String name;
+    private final String name;
 
     /**
      * Constructor.
@@ -20,14 +21,16 @@ public class Space {
      * @param name
      *            - name of the space;
      */
-    public Space(String name) {
+    public Space(final String name)
+    {
         this.name = name;
     }
 
     /**
      * @return the name
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -37,7 +40,8 @@ public class Space {
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return name;
     }
 

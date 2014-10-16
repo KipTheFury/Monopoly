@@ -16,7 +16,5 @@ import com.kb.monopoly.board.space.Property;
  */
 public interface BoardLoader
 {
-
     Map<Integer, Property> loadProperties(String fileLocation);
-
 }

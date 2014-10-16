@@ -3,13 +3,9 @@
  */
 package com.kb.monopoly.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 import com.kb.monopoly.board.Board;
-import com.kb.monopoly.board.space.Property;
 
 /**
  * A player.
@@ -19,14 +15,16 @@ import com.kb.monopoly.board.space.Property;
  */
 public class Player
 {
-
     private static final Logger LOG = Logger.getLogger(Player.class);
 
     private final String name;
     private int currentBalance;
     private int currentSpace;
 
-    private final List<Property> inventory = new ArrayList<Property>();
+    private boolean jailed = false;
+    private int getOutOfJailFreeCards = 0;
+
+    private final PropertyPortfolio propertyPortfolio;
 
     /**
      * Constructor.
@@ -39,6 +37,8 @@ public class Player
         this.name = name;
         currentBalance = 1500;
         currentSpace = 0;
+
+        propertyPortfolio = new PropertyPortfolio(this);
     }
 
     /**
@@ -78,9 +78,50 @@ public class Player
      * 
      * @return
      */
-    public List<Property> getInventory()
+    public PropertyPortfolio getPortfolio()
     {
-        return inventory;
+        return propertyPortfolio;
+    }
+
+    /**
+     * Returns true if the player has been jailed.
+     * 
+     * @return
+     */
+    public boolean isJailed()
+    {
+        return jailed;
+    }
+
+    /**
+     * Set true when the player has been jailed.
+     * 
+     * @param jailed
+     */
+    public void setJailed(final boolean jailed)
+    {
+        this.jailed = jailed;
+    }
+
+    /**
+     * Get the number of Get Out Of Jail Free cards currently held by the
+     * player.
+     * 
+     * @return
+     */
+    public int getGetOutOfJailFreeCards()
+    {
+        return getOutOfJailFreeCards;
+    }
+
+    /**
+     * Set the number of Get Out Of Jail Free cards the player is holding.
+     * 
+     * @param getOutOfJailFreeCards
+     */
+    public void setGetOutOfJailFreeCards(final int getOutOfJailFreeCards)
+    {
+        this.getOutOfJailFreeCards = getOutOfJailFreeCards;
     }
 
     /**
@@ -92,7 +133,6 @@ public class Player
      */
     public void move(final int roll)
     {
-
         if (roll < 2 || roll > 12)
         {
             LOG.error("Invalid Roll");
@@ -143,12 +183,10 @@ public class Player
      * @param compulsory
      *            - fines and rent must be paid.
      */
-    public void pay(final int amount, final boolean compulsory) throws IllegalArgumentException
+    public void pay(final int amount, final boolean compulsory)
     {
-
         if (amount > 0)
         {
-
             if (compulsory)
             {
                 LOG.info("[" + name + "] paid [" + amount + "] to the bank.");
@@ -157,7 +195,6 @@ public class Player
             }
             else
             {
-
                 if ((currentBalance - amount) > 0)
                 {
                     LOG.info("[" + name + "] paid [" + amount + "] to the bank.");
@@ -165,9 +202,10 @@ public class Player
                     currentBalance -= amount;
                 }
                 else
+                {
                     throw new IllegalArgumentException("Not enough money to complete the transaction");
+                }
             }
-
         }
         else
         {
@@ -199,114 +237,9 @@ public class Player
      */
     public void receive(final int amount)
     {
-
         LOG.info("[" + name + "] received [" + amount + "]");
 
         currentBalance += amount;
-    }
-
-    /**
-     * Buy a property, add it to inventory provided the player can afford it and
-     * it is not already owned by another player.
-     * 
-     * @param property
-     *            - the property to buy.
-     */
-    public void buy(final Property property)
-    {
-
-        if (property.getOwner() == null)
-        {
-            try
-            {
-                pay(property.getValue(), false);
-                inventory.add(property);
-                property.setOwner(this);
-
-                LOG.info("[" + name + "] bought [" + property + "]");
-
-            }
-            catch (final IllegalArgumentException iae)
-            {
-
-                LOG.error("Can't buy [" + property + "] - Not enough money!");
-
-                throw new IllegalArgumentException("Cannot buy [" + property + "] - Not enough money", iae);
-            }
-        }
-        else
-        {
-            throw new IllegalStateException("Cannot buy [" + property + "] - Already Owned by [" + property.getOwner() + "]");
-        }
-    }
-
-    /**
-     * Mortgage a property owned by the player, player receives the mortgage
-     * value of the property.
-     * 
-     * @param property
-     *            - the property to mortgage.
-     */
-    public void mortgage(final Property property)
-    {
-
-        if (inventory.contains(property))
-        {
-
-            if (!property.isMortgaged())
-            {
-
-                property.mortgage(true);
-                receive(property.getMortgageValue());
-
-            }
-            else
-            {
-                throw new IllegalStateException(property.getName() + " has already been mortgaged.");
-            }
-        }
-        else
-        {
-            throw new IllegalStateException("Cannot mortgage a Property you don't own.");
-        }
-    }
-
-    /**
-     * Un-mortgage a mortgaged property. Player must pay the mortgage value of
-     * the property.
-     * 
-     * @param property
-     *            - property to unmortgage.
-     */
-    public void unmortgage(final Property property)
-    {
-
-        if (inventory.contains(property))
-        {
-
-            if (property.isMortgaged())
-            {
-
-                try
-                {
-                    pay(property.getMortgageValue(), false);
-                    property.mortgage(false);
-                }
-                catch (final IllegalArgumentException iae)
-                {
-                    throw new IllegalArgumentException("Insufficient funds to unmortgage " + property.getName(), iae);
-                }
-
-            }
-            else
-            {
-                throw new IllegalStateException(property.getName() + " has not been mortgaged.");
-            }
-        }
-        else
-        {
-            throw new IllegalStateException("Cannot unmortgage a Property you don't own.");
-        }
     }
 
     /*
@@ -319,5 +252,4 @@ public class Player
     {
         return name;
     }
-
 }

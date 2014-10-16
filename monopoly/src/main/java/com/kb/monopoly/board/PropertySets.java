@@ -27,12 +27,10 @@ public final class PropertySets
      */
     public enum SetColour
     {
-
         Brown, LightBlue, Magenta, Orange, Red, Yellow, Green, DarkBlue;
-
     }
 
-    private static Map<SetColour, ArrayList<Street>> sets = new HashMap<SetColour, ArrayList<Street>>();
+    private static Map<SetColour, List<Street>> sets = new HashMap<SetColour, List<Street>>();
 
     /**
      * Get an ArrayList of streets for a colour set.
@@ -43,7 +41,6 @@ public final class PropertySets
      */
     public static List<Street> getPropertySet(final SetColour colour)
     {
-
         return sets.get(colour);
     }
 

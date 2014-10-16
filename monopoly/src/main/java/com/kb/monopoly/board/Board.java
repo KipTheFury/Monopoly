@@ -42,10 +42,12 @@ public class Board
     public static final int INCOME_TAX = 4;
     public static final int SUPER_TAX = 38;
 
-    public static final int[] CHANCE = new int[] { 7, 22, 36 };
-    public static final int[] COMMUNITY_CHEST = new int[] { 2, 17, 33 };
+    protected static final int[] CHANCE = new int[] { 7, 22, 36 };
+    protected static final int[] COMMUNITY_CHEST = new int[] { 2, 17, 33 };
 
     public static final int MAX_SPACE_INDEX = 39;
+
+    private static final String DEFAULT_FILE_LOCATION = "src/main/resources/DefaultBoard.json";
 
     private FixedSizeList<Space> spaces;
 
@@ -56,8 +58,6 @@ public class Board
     private int hotels = 12;
 
     private final BoardLoader boardLoader;
-
-    private final String defaultFileLocation = "src/main/resources/DefaultBoard.json";
 
     /**
      * Constructor. Loads the Spaces and Cards
@@ -104,7 +104,7 @@ public class Board
         spacesArray[INCOME_TAX] = new TaxSpace("Income Tax", 200);
         spacesArray[SUPER_TAX] = new TaxSpace("Super Tax", 100);
 
-        final Map<Integer, Property> properties = boardLoader.loadProperties(defaultFileLocation);
+        final Map<Integer, Property> properties = boardLoader.loadProperties(DEFAULT_FILE_LOCATION);
 
         for (final Entry<Integer, Property> property : properties.entrySet())
         {
