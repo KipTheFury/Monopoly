@@ -4,20 +4,21 @@
  * Created - 22 Apr 2014
  * Last Updated - 22 Apr 2014
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
+import com.kb.monopoly.board.space.Space;
 import com.kb.monopoly.player.Player;
 
 /**
  * @author Kyle
  * 
  */
-public abstract class Property extends Space {
-
-    protected final int value;
-    protected Player ownedBy;
-    protected final int mortgageValue;
-    protected boolean mortgaged;
+public abstract class Property extends Space
+{
+    private final int value;
+    private Player ownedBy;
+    private final int mortgageValue;
+    private boolean mortgaged;
 
     /**
      * Constructor.
@@ -27,17 +28,19 @@ public abstract class Property extends Space {
      * @param value
      *            - The value of the space
      */
-    public Property(final String name, final int value) {
+    public Property(final String name, final int value)
+    {
         super(name);
         this.value = value;
         mortgageValue = value / 2;
     }
 
     /**
-     * Calculate the amount of rent that must be paid to the owner of this property.
-     * 
-     * Depends on different factors such as number of houses/hotels, etc depending on the type of
+     * Calculate the amount of rent that must be paid to the owner of this
      * property.
+     * 
+     * Depends on different factors such as number of houses/hotels, etc
+     * depending on the type of property.
      * 
      * @return The amount of rent to be paid to the owner.
      * @throws IllegalAccessException
@@ -49,17 +52,20 @@ public abstract class Property extends Space {
      * 
      * @return - value of the space.
      */
-    public int getValue() {
+    public int getValue()
+    {
 
         return value;
     }
 
     /**
-     * If this property has been bought by a player return the player, otherwise returns null.
+     * If this property has been bought by a player return the player, otherwise
+     * returns null.
      * 
      * @return - the player who owns this property.
      */
-    public Player getOwner() {
+    public Player getOwner()
+    {
 
         return ownedBy;
     }
@@ -70,19 +76,21 @@ public abstract class Property extends Space {
      * @param player
      *            - new owner of this property.
      */
-    public void setOwner(final Player player) {
+    public void setOwner(final Player player)
+    {
 
         ownedBy = player;
     }
 
     /**
-     * Set the property's mortgage status, true to mortgage, false to un-mortgage.
+     * Set the property's mortgage status, true to mortgage, false to
+     * un-mortgage.
      * 
      * @param mortgaged
      */
-    public void mortgage(final boolean mortgaged) {
+    public void mortgage(final boolean mortgaged)
+    {
         this.mortgaged = mortgaged;
-
     }
 
     /**
@@ -90,7 +98,8 @@ public abstract class Property extends Space {
      * 
      * @return - the mortgage value
      */
-    public int getMortgageValue() {
+    public int getMortgageValue()
+    {
         return mortgageValue;
     }
 
@@ -99,8 +108,30 @@ public abstract class Property extends Space {
      * 
      * @return - this property's mortgage status.
      */
-    public boolean isMortgaged() {
+    public boolean isMortgaged()
+    {
         return mortgaged;
+    }
+
+    /**
+     * Get the player who owns this property.
+     * 
+     * @return - the player who owns the property.
+     */
+    public Player getOwnedBy()
+    {
+        return ownedBy;
+    }
+
+    /**
+     * Set the owner of the property.
+     * 
+     * @param ownedBy
+     *            - the player who owns the property.
+     */
+    public void setOwnedBy(final Player ownedBy)
+    {
+        this.ownedBy = ownedBy;
     }
 
     /*
@@ -109,7 +140,8 @@ public abstract class Property extends Space {
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
-        return super.toString();
+    public String toString()
+    {
+        return getName();
     }
 }

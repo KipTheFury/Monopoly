@@ -4,32 +4,32 @@
  * Created - 25 Apr 2014
  * Last Updated - 25 Apr 2014
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.space.Property;
-import com.kb.monopoly.board.space.Station;
-import com.kb.monopoly.board.space.Utility;
+import com.kb.monopoly.board.space.property.PropertyPortfolio;
+import com.kb.monopoly.board.space.property.Station;
+import com.kb.monopoly.board.space.property.Utility;
 import com.kb.monopoly.player.Player;
 
 /**
  * @author Kyle
  * 
  */
-public class StationTest {
+public class StationTest
+{
 
     private Station kingsCross, fenchurch, liverpoolSt, marylebone;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception
+    {
         kingsCross = new Station("Kings Cross");
         fenchurch = new Station("Fenchurch St");
         liverpoolSt = new Station("Liverpool Street");
@@ -37,38 +37,40 @@ public class StationTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void canCalculateRent() throws Exception {
+    public void canCalculateRent() throws Exception
+    {
 
-        Player mockPlayer = mock(Player.class);
-        ArrayList<Property> mockInventory = new ArrayList<Property>();
-        mockInventory.add(kingsCross);
-        mockInventory.add(new Utility("Utility"));
+        final Player mockPlayer = mock(Player.class);
+        final PropertyPortfolio mockInventory = new PropertyPortfolio(mockPlayer);
+        mockInventory.buy(kingsCross);
+        mockInventory.buy(new Utility("Utility"));
 
         kingsCross.setOwner(mockPlayer);
 
-        when(mockPlayer.getInventory()).thenReturn(mockInventory);
+        when(mockPlayer.getPortfolio()).thenReturn(mockInventory);
 
         assertEquals(25, kingsCross.calculateRent());
 
-        mockInventory.add(fenchurch);
+        mockInventory.buy(fenchurch);
 
         assertEquals(50, kingsCross.calculateRent());
 
-        mockInventory.add(liverpoolSt);
+        mockInventory.buy(liverpoolSt);
 
         assertEquals(100, kingsCross.calculateRent());
 
-        mockInventory.add(marylebone);
+        mockInventory.buy(marylebone);
 
         assertEquals(200, kingsCross.calculateRent());
 
-        mockInventory.add(kingsCross);
+        mockInventory.buy(kingsCross);
 
         kingsCross.calculateRent();
     }
 
     @Test(expected = IllegalAccessException.class)
-    public void cannotCalculateRentWithNoOwner() throws Exception {
+    public void cannotCalculateRentWithNoOwner() throws Exception
+    {
         kingsCross.calculateRent();
     }
 }

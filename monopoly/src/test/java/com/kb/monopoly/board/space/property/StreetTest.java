@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,16 +10,17 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.PropertySets;
-import com.kb.monopoly.board.PropertySets.SetColour;
-import com.kb.monopoly.board.space.Street;
+import com.kb.monopoly.board.space.property.PropertySets;
+import com.kb.monopoly.board.space.property.Street;
+import com.kb.monopoly.board.space.property.PropertySets.SetColour;
 import com.kb.monopoly.player.Player;
 
 /**
  * @author kbennett
  * 
  */
-public class StreetTest {
+public class StreetTest
+{
 
     private static final String NAME = "Mayfair";
     private static final int VALUE = 350;
@@ -34,23 +35,27 @@ public class StreetTest {
      * @throws java.lang.Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception
+    {
         mayfair = new Street(NAME, VALUE, COLOUR, BUILDING_COST, VALID_RENT);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotCreateStreetWithInvalidRentLevels() throws Exception {
+    public void cannotCreateStreetWithInvalidRentLevels() throws Exception
+    {
         new Street(NAME, VALUE, COLOUR, BUILDING_COST, INVALID_RENT);
     }
 
     @Test
-    public void canAddHouses() throws Exception {
+    public void canAddHouses() throws Exception
+    {
         mayfair.addHouse();
         assertEquals(1, mayfair.getBuildingCount());
     }
 
     @Test(expected = IllegalStateException.class)
-    public void cannotAddMoreThan4Houses() throws Exception {
+    public void cannotAddMoreThan4Houses() throws Exception
+    {
         addHouses(4, mayfair);
         assertEquals(4, mayfair.getBuildingCount());
 
@@ -58,7 +63,8 @@ public class StreetTest {
     }
 
     @Test
-    public void canAddHotel() throws Exception {
+    public void canAddHotel() throws Exception
+    {
 
         addHouses(4, mayfair);
         mayfair.addHotel();
@@ -67,14 +73,16 @@ public class StreetTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void cannotAddHotelWithout4Houses() throws Exception {
+    public void cannotAddHotelWithout4Houses() throws Exception
+    {
 
         addHouses(2, mayfair);
         mayfair.addHotel();
     }
 
     @Test(expected = IllegalStateException.class)
-    public void cannotAdd2Hotels() throws Exception {
+    public void cannotAdd2Hotels() throws Exception
+    {
         addHouses(4, mayfair);
         mayfair.addHotel();
 
@@ -83,24 +91,27 @@ public class StreetTest {
         mayfair.addHotel();
     }
 
-    private void addHouses(int houses, Street street) {
-        for (int i = 0; i < houses; i++) {
+    private void addHouses(final int houses, final Street street)
+    {
+        for (int i = 0; i < houses; i++)
+        {
             street.addHouse();
         }
     }
 
     @Test
-    public void canCalculateRent() throws Exception {
+    public void canCalculateRent() throws Exception
+    {
 
-        ArrayList<Street> darkBlue = new ArrayList<Street>();
-        Street parkLane = new Street(NAME, VALUE, COLOUR, BUILDING_COST, VALID_RENT);
+        final ArrayList<Street> darkBlue = new ArrayList<Street>();
+        final Street parkLane = new Street(NAME, VALUE, COLOUR, BUILDING_COST, VALID_RENT);
 
         darkBlue.add(parkLane);
         darkBlue.add(mayfair);
 
-        Player bob = new Player("Bob");
+        final Player bob = new Player("Bob");
 
-        bob.buy(mayfair);
+        bob.getPortfolio().buy(mayfair);
 
         PropertySets.addPropertySet(COLOUR, darkBlue);
 
@@ -108,7 +119,7 @@ public class StreetTest {
 
         assertEquals(VALID_RENT[0], mayfair.calculateRent());
 
-        bob.buy(parkLane);
+        bob.getPortfolio().buy(parkLane);
         parkLane.setOwner(bob);
 
         assertEquals(VALID_RENT[0] * 2, mayfair.calculateRent());
@@ -126,17 +137,20 @@ public class StreetTest {
     }
 
     @Test(expected = IllegalAccessException.class)
-    public void cannotCalculateRentWhenNotOwned() throws Exception {
+    public void cannotCalculateRentWhenNotOwned() throws Exception
+    {
         mayfair.calculateRent();
     }
 
     @Test
-    public void canGetBuildingCost() throws Exception {
+    public void canGetBuildingCost() throws Exception
+    {
         assertEquals(BUILDING_COST, mayfair.getBuildingCost());
     }
 
     @Test
-    public void canGetSetColour() throws Exception {
+    public void canGetSetColour() throws Exception
+    {
         assertEquals(COLOUR, mayfair.getSetColour());
     }
 

@@ -3,137 +3,168 @@
  */
 package com.kb.monopoly.player;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.space.Property;
-import com.kb.monopoly.board.space.Station;
+import com.kb.monopoly.board.Board;
 
 /**
  * @author kbennett
  * 
  */
-public class PlayerTest {
+public class PlayerTest
+{
 
     private Player bob;
     private Player jane;
 
-    private Property kingscross;
-
     @Before
-    public void Setup() {
+    public void Setup()
+    {
         bob = new Player("Bob");
         jane = new Player("Jane");
-
-        kingscross = new Station("Kings Cross");
     }
 
     @Test
-    public void canCreatePlayerCalledBob() throws Exception {
+    public void canCreatePlayerCalledBob() throws Exception
+    {
         assertEquals("Bob", bob.getName());
     }
 
     @Test
-    public void playerStartsWith1500Money() throws Exception {
+    public void playerStartsWith1500Money() throws Exception
+    {
         assertEquals(1500, bob.getCurrentBalance());
     }
 
     @Test
-    public void startsAtGo() throws Exception {
+    public void startsAtGo() throws Exception
+    {
         assertEquals(0, bob.getCurrentSpace());
     }
 
     @Test
-    public void canMove() throws Exception {
+    public void canMove() throws Exception
+    {
         bob.move(3);
         assertEquals(3, bob.getCurrentSpace());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotMoveLessThan2() throws Exception {
+    public void cannotMoveLessThan2() throws Exception
+    {
         bob.move(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotMoveMoreThan12() throws Exception {
+    public void cannotMoveMoreThan12() throws Exception
+    {
         bob.move(14);
     }
 
     @Test
-    public void canMoveToSpecificSpace() throws Exception {
+    public void canMoveToSpecificSpace() throws Exception
+    {
         bob.moveTo(15);
         assertEquals(15, bob.getCurrentSpace());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotMoveToInvalidSpace_negativeIndex() throws Exception {
+    public void cannotMoveToInvalidSpace_negativeIndex() throws Exception
+    {
         bob.moveTo(-1);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotMoveToInvalidSpace_indexGreaterThan39() throws Exception {
+    public void cannotMoveToInvalidSpace_indexGreaterThan39() throws Exception
+    {
         bob.moveTo(53);
     }
 
     @Test
-    public void canPassGo() throws Exception {
+    public void canPassGo() throws Exception
+    {
         passGo(10);
 
         assertEquals(9, bob.getCurrentSpace());
     }
 
     @Test
-    public void gets200forPassingGo() throws Exception {
+    public void gets200forPassingGo() throws Exception
+    {
 
-        int balanceBeforePassingGo = bob.getCurrentBalance();
+        final int balanceBeforePassingGo = bob.getCurrentBalance();
 
         passGo(7);
 
         assertEquals(balanceBeforePassingGo + 200, bob.getCurrentBalance());
     }
 
-    private void passGo(int roll) {
+    private void passGo(final int roll)
+    {
         bob.moveTo(39);
         bob.move(roll);
     }
 
     @Test
-    public void canPayBank() throws Exception {
-        int beforeBalance = bob.getCurrentBalance();
+    public void canGetGetOutOfJailFreeCards() throws Exception
+    {
+        bob.setGetOutOfJailFreeCards(1);
+        assertEquals(1, bob.getGetOutOfJailFreeCards());
+    }
+
+    @Test
+    public void canGetIsJailed() throws Exception
+    {
+        bob.setJailed(true);
+        assertTrue(bob.isJailed());
+    }
+
+    @Test
+    public void canPayBank() throws Exception
+    {
+        final int beforeBalance = bob.getCurrentBalance();
         bob.pay(300, false);
         assertEquals(beforeBalance - 300, bob.getCurrentBalance());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotPayBankLessThanZero() throws Exception {
+    public void cannotPayBankLessThanZero() throws Exception
+    {
         bob.pay(-100, false);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotPayBankMoreThanBalance_NonCompulsoryPayment() throws Exception {
+    public void cannotPayBankMoreThanBalance_NonCompulsoryPayment() throws Exception
+    {
         bob.pay(bob.getCurrentBalance() + 100, false);
     }
 
     @Test
-    public void canPayBankMoreThanBalance_CompulsoryPayment() throws Exception {
+    public void canPayBankMoreThanBalance_CompulsoryPayment() throws Exception
+    {
         bob.pay(bob.getCurrentBalance() + 100, true);
         assertEquals(-100, bob.getCurrentBalance());
     }
 
     @Test
-    public void canReceiveMoney() {
-        int beforeBalance = bob.getCurrentBalance();
+    public void canReceiveMoney()
+    {
+        final int beforeBalance = bob.getCurrentBalance();
         bob.receive(100);
         assertEquals(beforeBalance + 100, bob.getCurrentBalance());
     }
 
     @Test
-    public void canPayPlayer() throws Exception {
-        int bobBeforeBalance = bob.getCurrentBalance();
-        int janeBeforeBalance = jane.getCurrentBalance();
+    public void canPayPlayer() throws Exception
+    {
+        final int bobBeforeBalance = bob.getCurrentBalance();
+        final int janeBeforeBalance = jane.getCurrentBalance();
 
         bob.pay(jane, 100, false);
 
@@ -142,17 +173,19 @@ public class PlayerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotPayPlayerMoreThanCurrentBalance_NonCompulsoryPayment() throws Exception {
+    public void cannotPayPlayerMoreThanCurrentBalance_NonCompulsoryPayment() throws Exception
+    {
         bob.pay(jane, bob.getCurrentBalance() + 100, false);
     }
 
     @Test
-    public void canPayPlayerMoreThanCurrentBalance_CompulsoryPayment() throws Exception {
+    public void canPayPlayerMoreThanCurrentBalance_CompulsoryPayment() throws Exception
+    {
 
-        int bobBeforeBalance = bob.getCurrentBalance();
-        int janeBeforeBalance = jane.getCurrentBalance();
+        final int bobBeforeBalance = bob.getCurrentBalance();
+        final int janeBeforeBalance = jane.getCurrentBalance();
 
-        int paymentAmount = bobBeforeBalance + 100;
+        final int paymentAmount = bobBeforeBalance + 100;
 
         bob.pay(jane, paymentAmount, true);
 
@@ -161,98 +194,37 @@ public class PlayerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void cannotPayPlayerLessThanZero() throws Exception {
+    public void cannotPayPlayerLessThanZero() throws Exception
+    {
         bob.pay(jane, -100, false);
     }
 
     @Test
-    public void canBuyProperty() throws Exception {
+    public void canGoToJail() throws Exception
+    {
+        bob.goToJail();
 
-        int bobBeforeBalance = bob.getCurrentBalance();
-
-        bob.buy(kingscross);
-
-        assertTrue(bob.getInventory().contains(kingscross));
-        assertEquals(bobBeforeBalance - kingscross.getValue(), bob.getCurrentBalance());
-        assertEquals(bob, kingscross.getOwner());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void cannotBuyProperty_insufficientFunds() throws Exception {
-
-        bob.pay(bob.getCurrentBalance() - 10, true);
-
-        bob.buy(kingscross);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void cannotBuyProperty_alreadyOwned() throws Exception {
-
-        jane.buy(kingscross);
-
-        bob.buy(kingscross);
+        assertThat(bob.getCurrentSpace(), is(Board.JAIL));
+        assertThat(bob.isJailed(), is(true));
     }
 
     @Test
-    public void canMortgageProperty() throws Exception {
+    public void canUseGetOutOfJailFreeCard() throws Exception
+    {
+        bob.setGetOutOfJailFreeCards(2);
 
-        bob.buy(kingscross);
+        bob.useGetOutOfJailFreeCard();
 
-        int bobBeforeBalance = bob.getCurrentBalance();
-
-        bob.mortgage(kingscross);
-
-        assertEquals(bobBeforeBalance + kingscross.getMortgageValue(), bob.getCurrentBalance());
-
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void cannotMortgagePropertyNotOwned() throws Exception {
-        bob.mortgage(kingscross);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void cannotMortgageMortgagedProperty() throws Exception {
-
-        bob.buy(kingscross);
-        bob.mortgage(kingscross);
-
-        bob.mortgage(kingscross);
+        assertThat(bob.getGetOutOfJailFreeCards(), is(1));
+        assertThat(bob.isJailed(), is(false));
     }
 
     @Test
-    public void canUnmortgageProperty() throws Exception {
+    public void canPayBail() throws Exception
+    {
+        bob.payBail();
 
-        bob.buy(kingscross);
-        bob.mortgage(kingscross);
-
-        int bobBeforeBalance = bob.getCurrentBalance();
-
-        bob.unmortgage(kingscross);
-
-        assertEquals(bobBeforeBalance - kingscross.getMortgageValue(), bob.getCurrentBalance());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void cannotUnmortgageProperty_insufficientFunds() throws Exception {
-
-        bob.buy(kingscross);
-        bob.mortgage(kingscross);
-
-        bob.pay(bob.getCurrentBalance() - 1, true);
-
-        bob.unmortgage(kingscross);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void cannotUnmortgagePropertyNotOwned() throws Exception {
-        bob.unmortgage(kingscross);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void cannotUnmortgageNonMortgagedProperty() throws Exception {
-
-        bob.buy(kingscross);
-        bob.unmortgage(kingscross);
+        assertThat(bob.getCurrentBalance(), is(1450));
+        assertThat(bob.isJailed(), is(false));
     }
 }

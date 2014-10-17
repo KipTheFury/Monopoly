@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class XMLBoardValidator {
 
-    private static final Logger log = Logger.getLogger(XMLBoardValidator.class);
+    private static final Logger LOG = Logger.getLogger(XMLBoardValidator.class);
 
     public boolean validate(File xml, File xsd) {
 
@@ -36,7 +36,7 @@ public class XMLBoardValidator {
             return true;
 
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             return false;
         }
 

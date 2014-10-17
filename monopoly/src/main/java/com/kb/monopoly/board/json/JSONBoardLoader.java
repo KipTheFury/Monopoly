@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
@@ -17,18 +18,19 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.kb.monopoly.board.BoardLoader;
-import com.kb.monopoly.board.PropertySets;
-import com.kb.monopoly.board.PropertySets.SetColour;
-import com.kb.monopoly.board.space.Property;
-import com.kb.monopoly.board.space.Station;
-import com.kb.monopoly.board.space.Street;
-import com.kb.monopoly.board.space.Utility;
+import com.kb.monopoly.board.space.property.Property;
+import com.kb.monopoly.board.space.property.PropertySets;
+import com.kb.monopoly.board.space.property.Station;
+import com.kb.monopoly.board.space.property.Street;
+import com.kb.monopoly.board.space.property.Utility;
+import com.kb.monopoly.board.space.property.PropertySets.SetColour;
 
 /**
  * @author kbennett
  * 
  */
-public class JSONBoardLoader implements BoardLoader {
+public class JSONBoardLoader implements BoardLoader
+{
 
     private static final String BUILDING_COST = "-BuildingCost";
     private static final String VALUE = "-Value";
@@ -43,7 +45,7 @@ public class JSONBoardLoader implements BoardLoader {
 
     private static final Logger LOG = Logger.getLogger(JSONBoardLoader.class);
 
-    private HashMap<Integer, Property> properties;
+    private Map<Integer, Property> properties;
 
     /*
      * (non-Javadoc)
@@ -51,7 +53,8 @@ public class JSONBoardLoader implements BoardLoader {
      * @see com.kb.monopoly.board.BoardLoader#loadBoard(java.lang.String)
      */
     @Override
-    public HashMap<Integer, Property> loadProperties(final String fileLocation) {
+    public Map<Integer, Property> loadProperties(final String fileLocation)
+    {
 
         properties = new HashMap<Integer, Property>();
 
@@ -60,7 +63,8 @@ public class JSONBoardLoader implements BoardLoader {
         final JSONParser parser = new JSONParser();
         JSONObject json;
 
-        try {
+        try
+        {
             json = (JSONObject) parser.parse(new FileReader(fileLocation));
 
             final JSONArray propertySets = (JSONArray) json.get(PROPERTY_SET);
@@ -72,11 +76,17 @@ public class JSONBoardLoader implements BoardLoader {
             final JSONArray utilities = (JSONArray) json.get(UTILITY);
             loadUtilities(utilities);
 
-        } catch (final FileNotFoundException e) {
+        }
+        catch (final FileNotFoundException e)
+        {
             LOG.error(e.getMessage(), e);
-        } catch (final IOException e) {
+        }
+        catch (final IOException e)
+        {
             LOG.error(e.getMessage(), e);
-        } catch (final ParseException e) {
+        }
+        catch (final ParseException e)
+        {
             LOG.error(e.getMessage(), e);
         }
 
@@ -84,13 +94,15 @@ public class JSONBoardLoader implements BoardLoader {
     }
 
     @SuppressWarnings("unchecked")
-    private void loadPropertySets(final JSONArray propertySets) {
+    private void loadPropertySets(final JSONArray propertySets)
+    {
 
         LOG.info("Loading Property Sets...");
 
         final Iterator<JSONObject> iterator = propertySets.iterator();
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
 
             final JSONObject set = iterator.next();
 
@@ -102,7 +114,8 @@ public class JSONBoardLoader implements BoardLoader {
     }
 
     @SuppressWarnings("unchecked")
-    private void loadStreets(final JSONArray streets, final SetColour colour) {
+    private void loadStreets(final JSONArray streets, final SetColour colour)
+    {
 
         LOG.info("Loading Streets in the " + colour + " set...");
 
@@ -110,7 +123,8 @@ public class JSONBoardLoader implements BoardLoader {
 
         final ArrayList<Street> streetsList = new ArrayList<Street>();
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
 
             final JSONObject obj = iterator.next();
             final JSONObject rentLevels = (JSONObject) obj.get(RENT_LEVELS);
@@ -119,9 +133,8 @@ public class JSONBoardLoader implements BoardLoader {
 
             final int boardIndex = Integer.valueOf((String) obj.get(BOARD_INDEX));
 
-            final Street street =
-                    new Street((String) obj.get(NAME), Integer.valueOf((String) obj.get(VALUE)), colour,
-                            Integer.valueOf((String) obj.get(BUILDING_COST)), rent);
+            final Street street = new Street((String) obj.get(NAME), Integer.valueOf((String) obj.get(VALUE)), colour, Integer.valueOf((String) obj
+                    .get(BUILDING_COST)), rent);
 
             streetsList.add(street);
 
@@ -133,11 +146,13 @@ public class JSONBoardLoader implements BoardLoader {
         PropertySets.addPropertySet(colour, streetsList);
     }
 
-    private int[] getRentLevels(final Object[] levels) {
+    private int[] getRentLevels(final Object[] levels)
+    {
 
         final int[] rent = new int[levels.length];
 
-        for (int i = 0; i < levels.length; i++) {
+        for (int i = 0; i < levels.length; i++)
+        {
             rent[i] = Integer.valueOf((String) levels[i]);
         }
 
@@ -146,13 +161,15 @@ public class JSONBoardLoader implements BoardLoader {
 
     // TODO - Board index for utilities and stations
     @SuppressWarnings("unchecked")
-    private void loadUtilities(final JSONArray utilities) {
+    private void loadUtilities(final JSONArray utilities)
+    {
 
         LOG.info("Loading Utilities...");
 
         final Iterator<JSONObject> iterator = utilities.iterator();
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             final JSONObject obj = iterator.next();
 
             final int boardIndex = Integer.valueOf((String) obj.get(BOARD_INDEX));
@@ -165,13 +182,15 @@ public class JSONBoardLoader implements BoardLoader {
     }
 
     @SuppressWarnings("unchecked")
-    private void loadStations(final JSONArray stations) {
+    private void loadStations(final JSONArray stations)
+    {
 
         LOG.info("Loading Stations...");
 
         final Iterator<JSONObject> iterator = stations.iterator();
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             final JSONObject obj = iterator.next();
 
             final int boardIndex = Integer.valueOf((String) obj.get(BOARD_INDEX));
