@@ -4,7 +4,7 @@
  * Created - 25 Apr 2014
  * Last Updated - 25 Apr 2014
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
 /**
  * @author Kyle
@@ -13,6 +13,8 @@ package com.kb.monopoly.board.space;
 public class Utility extends Property
 {
 
+    private static final int TWO_UTILITIES = 10;
+    private static final int ONE_UTILITY = 4;
     private static final int UTILITY_VALUE = 150;
 
     /**
@@ -59,9 +61,9 @@ public class Utility extends Property
             switch (utilityCount)
             {
                 case 1:
-                    return 4 * diceRoll;
+                    return ONE_UTILITY * diceRoll;
                 case 2:
-                    return 10 * diceRoll;
+                    return TWO_UTILITIES * diceRoll;
 
                 default:
                     throw new IllegalStateException("You own too many/not enough utilities");

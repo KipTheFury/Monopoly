@@ -1,11 +1,8 @@
-package com.kb.monopoly.board;
+package com.kb.monopoly.board.space.property;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.kb.monopoly.board.space.Street;
 
 /**
  * @author kbennett
@@ -52,7 +49,7 @@ public final class PropertySets
      * @param streets
      *            - the streets in that set.
      */
-    public static void addPropertySet(final SetColour colour, final ArrayList<Street> streets)
+    public static void addPropertySet(final SetColour colour, final List<Street> streets)
     {
         sets.put(colour, streets);
     }

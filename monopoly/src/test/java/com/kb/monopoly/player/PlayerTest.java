@@ -3,14 +3,15 @@
  */
 package com.kb.monopoly.player;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.space.Property;
-import com.kb.monopoly.board.space.Station;
+import com.kb.monopoly.board.Board;
 
 /**
  * @author kbennett
@@ -22,15 +23,11 @@ public class PlayerTest
     private Player bob;
     private Player jane;
 
-    private Property kingscross;
-
     @Before
     public void Setup()
     {
         bob = new Player("Bob");
         jane = new Player("Jane");
-
-        kingscross = new Station("Kings Cross");
     }
 
     @Test
@@ -200,5 +197,34 @@ public class PlayerTest
     public void cannotPayPlayerLessThanZero() throws Exception
     {
         bob.pay(jane, -100, false);
+    }
+
+    @Test
+    public void canGoToJail() throws Exception
+    {
+        bob.goToJail();
+
+        assertThat(bob.getCurrentSpace(), is(Board.JAIL));
+        assertThat(bob.isJailed(), is(true));
+    }
+
+    @Test
+    public void canUseGetOutOfJailFreeCard() throws Exception
+    {
+        bob.setGetOutOfJailFreeCards(2);
+
+        bob.useGetOutOfJailFreeCard();
+
+        assertThat(bob.getGetOutOfJailFreeCards(), is(1));
+        assertThat(bob.isJailed(), is(false));
+    }
+
+    @Test
+    public void canPayBail() throws Exception
+    {
+        bob.payBail();
+
+        assertThat(bob.getCurrentBalance(), is(1450));
+        assertThat(bob.isJailed(), is(false));
     }
 }

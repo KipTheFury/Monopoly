@@ -6,6 +6,7 @@ package com.kb.monopoly.player;
 import org.apache.log4j.Logger;
 
 import com.kb.monopoly.board.Board;
+import com.kb.monopoly.board.space.property.PropertyPortfolio;
 
 /**
  * A player.
@@ -15,6 +16,13 @@ import com.kb.monopoly.board.Board;
  */
 public class Player
 {
+    private static final int INITIAL_BALANCE = 1500;
+    private static final int GO_FEE = 200;
+    private static final int BAIL = 50;
+
+    private static final int MAX_ROLL = 12;
+    private static final int MIN_ROLL = 2;
+
     private static final Logger LOG = Logger.getLogger(Player.class);
 
     private final String name;
@@ -35,7 +43,7 @@ public class Player
     public Player(final String name)
     {
         this.name = name;
-        currentBalance = 1500;
+        currentBalance = INITIAL_BALANCE;
         currentSpace = 0;
 
         propertyPortfolio = new PropertyPortfolio(this);
@@ -133,7 +141,7 @@ public class Player
      */
     public void move(final int roll)
     {
-        if (roll < 2 || roll > 12)
+        if (roll < MIN_ROLL || roll > MAX_ROLL)
         {
             LOG.error("Invalid Roll");
             throw new IllegalArgumentException("Invalid Roll");
@@ -146,10 +154,10 @@ public class Player
         else
         {
 
-            LOG.info("[" + name + "] passed Go! Collect 200");
+            LOG.info("[" + name + "] passed Go! Collect " + GO_FEE);
 
             currentSpace = (currentSpace + roll) - (Board.MAX_SPACE_INDEX + 1);
-            currentBalance += 200;
+            currentBalance += GO_FEE;
 
         }
     }
@@ -242,11 +250,28 @@ public class Player
         currentBalance += amount;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
+    /**
+     * Use a Get Out Of Jail Free card.
      */
+    public void useGetOutOfJailFreeCard()
+    {
+        this.jailed = false;
+        this.getOutOfJailFreeCards--;
+    }
+
+    public void payBail()
+    {
+        pay(BAIL, true);
+        this.jailed = false;
+    }
+
+    public void goToJail()
+    {
+        moveTo(Board.JAIL);
+        this.jailed = true;
+
+    }
+
     @Override
     public String toString()
     {

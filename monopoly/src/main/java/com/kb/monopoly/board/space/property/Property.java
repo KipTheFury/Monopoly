@@ -4,8 +4,9 @@
  * Created - 22 Apr 2014
  * Last Updated - 22 Apr 2014
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
+import com.kb.monopoly.board.space.Space;
 import com.kb.monopoly.player.Player;
 
 /**

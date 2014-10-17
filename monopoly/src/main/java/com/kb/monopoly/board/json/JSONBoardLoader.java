@@ -18,12 +18,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.kb.monopoly.board.BoardLoader;
-import com.kb.monopoly.board.PropertySets;
-import com.kb.monopoly.board.PropertySets.SetColour;
-import com.kb.monopoly.board.space.Property;
-import com.kb.monopoly.board.space.Station;
-import com.kb.monopoly.board.space.Street;
-import com.kb.monopoly.board.space.Utility;
+import com.kb.monopoly.board.space.property.Property;
+import com.kb.monopoly.board.space.property.PropertySets;
+import com.kb.monopoly.board.space.property.Station;
+import com.kb.monopoly.board.space.property.Street;
+import com.kb.monopoly.board.space.property.Utility;
+import com.kb.monopoly.board.space.property.PropertySets.SetColour;
 
 /**
  * @author kbennett

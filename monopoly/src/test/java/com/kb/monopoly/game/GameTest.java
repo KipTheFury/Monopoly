@@ -54,10 +54,9 @@ public class GameTest
     @Test
     public void canRollDie() throws Exception
     {
-
         for (int i = 0; i < 10; i++)
         {
-            final int roll = g.rollDie();
+            final int roll = Game.rollDie();
             assertTrue(roll >= 1 && roll <= 6);
         }
     }
@@ -109,7 +108,7 @@ public class GameTest
     {
 
         final DiceRoller mockDice = mock(DiceRoller.class);
-        g.setDice(mockDice);
+        Game.dice = mockDice;
 
         g.addPlayer(bob);
         g.addPlayer(jane);
@@ -124,11 +123,10 @@ public class GameTest
     }
 
     @Test
-    public void turnNumberIncrementsAfterAllPlayersHaveEndedTurns() throws Exception
+    public void turnNumberIncrementsAtStartOfEachTurn() throws Exception
     {
-
         final DiceRoller mockDice = mock(DiceRoller.class);
-        g.setDice(mockDice);
+        Game.dice = mockDice;
 
         g.addPlayer(bob);
         g.addPlayer(jane);
@@ -147,7 +145,6 @@ public class GameTest
         g.endTurn();
         assertEquals(bob, g.getCurrentPlayer());
 
-        assertEquals(currentTurnNumber + 1, g.getCurrentTurn());
+        assertEquals(currentTurnNumber + 2, g.getCurrentTurn());
     }
-
 }

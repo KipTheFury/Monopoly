@@ -12,9 +12,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.PropertySets;
-import com.kb.monopoly.board.PropertySets.SetColour;
-import com.kb.monopoly.board.space.Property;
+import com.kb.monopoly.board.space.property.Property;
+import com.kb.monopoly.board.space.property.PropertySets;
+import com.kb.monopoly.board.space.property.PropertySets.SetColour;
 
 /**
  * @author kbennett

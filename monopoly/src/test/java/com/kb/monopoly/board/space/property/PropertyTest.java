@@ -4,7 +4,7 @@
  * Created - 22 Apr 2014
  * Last Updated - 22 Apr 2014
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,37 +13,51 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.space.Station;
+import com.kb.monopoly.player.Player;
 
 /**
  * @author Kyle
  * 
  */
-public class PropertyTest {
+public class PropertyTest
+{
 
     private Station kingsCross;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception
+    {
         kingsCross = new Station("Kings Cross Station");
     }
 
     @Test
-    public void canGetValue() throws Exception {
+    public void canGetValue() throws Exception
+    {
         assertEquals(200, kingsCross.getValue());
     }
 
     @Test
-    public void canGetMortgageValue() throws Exception {
+    public void canGetMortgageValue() throws Exception
+    {
         assertEquals(100, kingsCross.getMortgageValue());
     }
 
     @Test
-    public void canMortgage() throws Exception {
+    public void canMortgage() throws Exception
+    {
         kingsCross.mortgage(true);
         assertTrue(kingsCross.isMortgaged());
 
         kingsCross.mortgage(false);
         assertFalse(kingsCross.isMortgaged());
+    }
+
+    @Test
+    public void canFindOwner() throws Exception
+    {
+        final Player bob = new Player("Bob");
+
+        kingsCross.setOwnedBy(bob);
+        assertEquals(bob, kingsCross.getOwnedBy());
     }
 }

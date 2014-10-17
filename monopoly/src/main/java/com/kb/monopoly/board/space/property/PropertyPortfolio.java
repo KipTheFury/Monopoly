@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.kb.monopoly.player;
+package com.kb.monopoly.board.space.property;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.kb.monopoly.board.space.Property;
+import com.kb.monopoly.player.Player;
 
 /**
  * @author kylebennett

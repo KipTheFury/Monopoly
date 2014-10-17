@@ -8,9 +8,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.kb.monoploy.turn.Turn;
 import com.kb.monopoly.board.Board;
+import com.kb.monopoly.board.json.JSONBoardLoader;
 import com.kb.monopoly.player.Player;
+import com.kb.monopoly.turn.Turn;
 
 /**
  * The main game class. Sets up the board and holds the players.
@@ -21,6 +22,8 @@ import com.kb.monopoly.player.Player;
 public class Game
 {
 
+    private static final int MAX_PLAYERS = 4;
+    private static final int MIN_PLAYERS = 2;
     private static final Logger LOG = Logger.getLogger(Game.class);
 
     public static enum GameState
@@ -31,10 +34,10 @@ public class Game
     private final List<Player> playerList = new ArrayList<Player>();
     private final Board board;
 
-    private DiceRoller dice = new DiceRoller();
+    public static DiceRoller dice = new DiceRoller();
 
     private int currentPlayerIndex;
-    private int currentTurn = 1;
+    private int currentTurn = 0;
 
     private Player currentPlayer;
 
@@ -45,7 +48,7 @@ public class Game
      */
     public Game()
     {
-        board = new Board();
+        board = new Board(new JSONBoardLoader());
     }
 
     /**
@@ -85,7 +88,7 @@ public class Game
      * 
      * @return - random result of a 6-sided Dice
      */
-    public int rollDie()
+    public static int rollDie()
     {
         return dice.roll();
     }
@@ -95,7 +98,7 @@ public class Game
      */
     public void startGame()
     {
-        if (playerList.size() >= 2 && playerList.size() <= 4)
+        if (playerList.size() >= MIN_PLAYERS && playerList.size() <= MAX_PLAYERS)
         {
             LOG.info("===== Starting Game =====");
 
@@ -121,11 +124,11 @@ public class Game
     {
         if (gameState != GameState.ENDED)
         {
+            currentTurn++;
+
             LOG.info("----- Starting Turn - " + currentPlayer + " -  Turn " + currentTurn + " -----");
 
-            final Turn t = new Turn(currentPlayer);
-
-            t.takeTurn();
+            new Turn(currentPlayer, this);
         }
         else
         {
@@ -143,7 +146,6 @@ public class Game
         if (++currentPlayerIndex == playerList.size())
         {
             currentPlayerIndex = 0;
-            currentTurn++;
         }
 
         currentPlayer = playerList.get(currentPlayerIndex);
@@ -194,17 +196,5 @@ public class Game
     public int getCurrentTurn()
     {
         return currentTurn;
-    }
-
-    /**
-     * Set the dice to use.
-     * 
-     * For unit test mocking only.
-     * 
-     * @param dice
-     */
-    public void setDice(final DiceRoller dice)
-    {
-        this.dice = dice;
     }
 }

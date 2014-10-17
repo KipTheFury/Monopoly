@@ -4,7 +4,7 @@
  * Created - 25 Apr 2014
  * Last Updated - 25 Apr 2014
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
 /**
  * @author Kyle
@@ -14,6 +14,7 @@ public class Station extends Property
 {
 
     private static final int STATION_VALUE = 200;
+    private static final int STATION_RENT[] = { 0, 25, 50, 100, 200 };
 
     /**
      * Constructor.
@@ -51,18 +52,6 @@ public class Station extends Property
             throw new IllegalAccessException("No-one owns this property");
         }
 
-        switch (stationCount)
-        {
-            case 1:
-                return 25;
-            case 2:
-                return 50;
-            case 3:
-                return 100;
-            case 4:
-                return 200;
-            default:
-                throw new IllegalStateException("You own too many/not enough stations");
-        }
+        return STATION_RENT[stationCount];
     }
 }

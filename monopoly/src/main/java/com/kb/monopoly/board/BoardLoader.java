@@ -8,7 +8,7 @@ package com.kb.monopoly.board;
 
 import java.util.Map;
 
-import com.kb.monopoly.board.space.Property;
+import com.kb.monopoly.board.space.property.Property;
 
 /**
  * @author Kyle

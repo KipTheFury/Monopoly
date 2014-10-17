@@ -1,12 +1,11 @@
 /**
  * 
  */
-package com.kb.monopoly.board.space;
+package com.kb.monopoly.board.space.property;
 
 import java.util.List;
 
-import com.kb.monopoly.board.PropertySets;
-import com.kb.monopoly.board.PropertySets.SetColour;
+import com.kb.monopoly.board.space.property.PropertySets.SetColour;
 
 /**
  * @author kbennett
@@ -14,6 +13,8 @@ import com.kb.monopoly.board.PropertySets.SetColour;
  */
 public class Street extends Property
 {
+    private static final int RENT_LEVELS = 6;
+
     private static final int MAX_HOUSES = 4;
 
     private final SetColour setColour;
@@ -47,7 +48,7 @@ public class Street extends Property
         this.setColour = setColour;
         this.buildingCost = buildingCost;
 
-        if (rent.length == 6)
+        if (rent.length == RENT_LEVELS)
         {
             rentLevels = rent.clone();
         }

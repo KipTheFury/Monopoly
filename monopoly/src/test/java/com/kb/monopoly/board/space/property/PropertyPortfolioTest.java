@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kb.monopoly.player;
+package com.kb.monopoly.board.space.property;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,7 +9,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kb.monopoly.board.space.Station;
+import com.kb.monopoly.board.space.property.PropertyPortfolio;
+import com.kb.monopoly.board.space.property.Station;
+import com.kb.monopoly.player.Player;
 
 /**
  * @author kylebennett
